@@ -4,12 +4,24 @@ import { createHashRouter, RouteObject } from 'react-router-dom';
 const router = createHashRouter([
   // { path: '/', redirect: '/welcome' },
   {
-    path: '/',
-    element: <div>this is home</div>,
-  },
-  {
-    path: '/login',
-    element: <div>this is login</div>,
+    path: '/welcome',
+    // component: () => import('@/pages/Welcome'),
+    // beforeEnter: (_, __, next) => {
+    //   localStorage.getItem('skipFeature') === 'yes' ? next('/start') : next();
+    // },
+    children: [
+      {
+        path: '',
+        // redirect: '/welcome/1',
+      },
+      {
+        path: ':id',
+        // element: {
+        // main: () => import('@/pages/Welcome/Components/Render'),
+        // footer: () => import('@/pages/Welcome/Components/Action'),
+        // },
+      },
+    ],
   },
 ]);
 
