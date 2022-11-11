@@ -14,7 +14,7 @@ interface OptionsProps {
 }
 
 export const useSwipe = (
-  element: MutableRefObject<HTMLElement | undefined>,
+  element: HTMLElement | undefined,
   options?: OptionsProps
 ) => {
   const [start, setStart] = useState<Point>();
