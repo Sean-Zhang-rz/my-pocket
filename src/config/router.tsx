@@ -1,8 +1,9 @@
 // hostory 模式路由 // hash模式
-import { createHashRouter, RouteObject } from 'react-router-dom';
+import { createHashRouter, Navigate, RouteObject } from 'react-router-dom';
+import Welcome from '../pages/Welcome';
 
 const router = createHashRouter([
-  // { path: '/', redirect: '/welcome' },
+  { path: '/', element: <Navigate to="/welcome" replace /> },
   {
     path: '/welcome',
     // component: () => import('@/pages/Welcome'),
@@ -12,10 +13,11 @@ const router = createHashRouter([
     children: [
       {
         path: '',
-        // redirect: '/welcome/1',
+        element: <Navigate to="/welcome/1" replace />,
       },
       {
         path: ':id',
+        element: <Welcome />,
         // element: {
         // main: () => import('@/pages/Welcome/Components/Render'),
         // footer: () => import('@/pages/Welcome/Components/Action'),
