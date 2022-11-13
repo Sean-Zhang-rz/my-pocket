@@ -1,17 +1,18 @@
-import { FC, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { FC, MouseEventHandler, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import Icon, { IconName } from '../Components/Icon';
 
 import styles from './index.module.scss';
 
 interface NavBarProps {
   title: string;
-  icon: string;
+  icon: IconName;
 }
 export const NavBar: FC<NavBarProps> = ({ icon, title }) => {
   const [overlayVisible, setOverlayVisible] = useState<boolean>(false);
   const nav = useNavigate();
   const [params] = useSearchParams();
-  const goBack = () => {
+  const goBack: MouseEventHandler<SVGSVGElement> | undefined = () => {
     const return_to = params.get('return_to');
     if (return_to) {
       nav(return_to.toString());
@@ -19,14 +20,14 @@ export const NavBar: FC<NavBarProps> = ({ icon, title }) => {
       router.back();
     }
   };
-  const openMenu = () => {
+  const openMenu: MouseEventHandler<SVGSVGElement> | undefined = () => {
     setOverlayVisible((pre) => !pre);
   };
   return (
     <div className={styles.navbar}>
       {icon ? (
         <span className={styles.icon_wrapper}>
-          <Icon name={icon} class={styles.icon} onClick={icon === 'menu' ? openMenu : goBack} />
+          <Icon name={icon} className={styles.icon} onClick={icon === 'menu' ? openMenu : goBack} />
         </span>
       ) : null}
       <span className={styles.title_wrapper}>{title}</span>
