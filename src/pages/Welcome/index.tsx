@@ -9,7 +9,7 @@ const Welcome: FC = () => {
   const main = useRef<HTMLElement>();
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const { swiping, direction } = useSwipe(main);
+  // const { swiping, direction } = useSwipe(main);
   const pushRouter = throttle(() => {
     const pageId = parseInt(params.get('id')?.toString() || '');
     if (pageId === 4) return;
@@ -20,19 +20,12 @@ const Welcome: FC = () => {
     if (pageId === 1) return;
     // router.back();
   }, 500);
-  // watchEffect(() => {
-  //   if (swiping.value && direction.value === 'left') {
-  //     pushRouter();
-  //   } else if (swiping.value && direction.value === 'right') {
-  //     backRouter();
-  //   }
-  // });
   useEffect(() => {
-    if (swiping && direction === 'left') {
-      pushRouter();
-    } else if (swiping && direction === 'right') {
-      backRouter();
-    }
+    // if (swiping && direction === 'left') {
+    //   pushRouter();
+    // } else if (swiping && direction === 'right') {
+    //   backRouter();
+    // }
   }, []);
 
   return (
