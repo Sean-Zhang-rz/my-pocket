@@ -30,25 +30,6 @@ const router = createHashRouter([
       },
     ],
   },
-  // {
-  //   path: '/welcome',
-  //   // component: () => import('@/pages/Welcome'),
-  //   // beforeEnter: (_, __, next) => {
-  //   //   localStorage.getItem('skipFeature') === 'yes' ? next('/start') : next();
-  //   // },
-  //   children: [
-  //     {
-  //       path: '',
-  //       element: <Navigate to="/welcome/1" replace />,
-  //     },
-  //     {
-  //       // element: {
-  //       // main: () => import('@/pages/Welcome/Components/Render'),
-  //       // footer: () => import('@/pages/Welcome/Components/Action'),
-  //       // },
-  //     },
-  //   ],
-  // },
 ]);
 
 export default router;

@@ -2,6 +2,8 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { join } from 'path';
 
+import { svgstore } from './src/plugins/svgstore';
+
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
@@ -9,5 +11,13 @@ export default defineConfig({
       '@': join(__dirname, 'src'),
     },
   },
-  plugins: [react()],
+  plugins: [react(), svgstore()],
+  server: {
+    proxy: {
+      '/api/v1': {
+        // target: 'http://127.0.0.1:3000/',
+        target: 'http://121.4.100.133:3000/',
+      },
+    },
+  },
 });

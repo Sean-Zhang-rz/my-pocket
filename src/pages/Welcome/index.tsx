@@ -1,7 +1,6 @@
 import { FC, useEffect, useRef } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { animated, useTransition } from '@react-spring/web';
-import { useSwipe } from '@/hooks/useSwipe';
 import { throttle } from '@/utils/throttle';
 import logoSvg from '@/assets/icons/logo.svg';
 import styles from './index.module.scss';
@@ -9,13 +8,15 @@ import styles from './index.module.scss';
 const Welcome: FC = () => {
   const location = useLocation(); // 获取当前路径
   const transitions = useTransition(location.pathname, {
-    from: { transform: 'translateX(100%)' },
+    from: () =>
+      location.pathname === '/welcome/1'
+        ? { transform: 'translateX(0%)' }
+        : { transform: 'translateX(100%)' },
     enter: { transform: 'translateX(0%)' },
     leave: { transform: 'translateX(-100%)' },
     config: { duration: 1000 },
   });
 
-  const main = useRef<HTMLElement>();
   const navigate = useNavigate();
   const [params] = useSearchParams();
   // const { swiping, direction } = useSwipe(main);
