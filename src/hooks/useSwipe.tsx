@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useMemo } from 'react';
+import { RefObject, useEffect, useState, useMemo } from 'react';
 
 type Point = { x: number; y: number };
 
@@ -13,10 +11,7 @@ interface OptionsProps {
   endEnd?: (e: TouchEvent) => void;
 }
 
-export const useSwipe = (
-  element: HTMLElement | undefined,
-  options?: OptionsProps
-) => {
+export const useSwipe = (element: RefObject<HTMLElement | undefined>, options?: OptionsProps) => {
   const [start, setStart] = useState<Point>();
   const [end, setEnd] = useState<Point>();
   const [swiping, setSwiping] = useState(false);
@@ -64,15 +59,15 @@ export const useSwipe = (
     options?.endEnd?.(e);
   };
   useEffect(() => {
-    if (!element) return;
-    element?.addEventListener('touchstart', onStart);
-    element?.addEventListener('touchmove', onMove);
-    element?.addEventListener('touchend', onEnd);
+    if (!element.current) return;
+    element?.current?.addEventListener('touchstart', onStart);
+    element?.current?.addEventListener('touchmove', onMove);
+    element?.current?.addEventListener('touchend', onEnd);
     return () => {
-      if (!element) return;
-      element?.removeEventListener('touchstart', onStart);
-      element?.removeEventListener('touchmove', onMove);
-      element?.removeEventListener('touchend', onEnd);
+      if (!element.current) return;
+      element?.current?.removeEventListener('touchstart', onStart);
+      element?.current?.removeEventListener('touchmove', onMove);
+      element?.current?.removeEventListener('touchend', onEnd);
     };
   }, []);
   return {

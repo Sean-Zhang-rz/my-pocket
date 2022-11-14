@@ -19,13 +19,14 @@
   }
   > main {
     flex-grow: 1;
+    flex-shrink: 1;
     display: flex;
     flex-direction: column;
     position: relative;
-    margin: 16px 16px var(--welcome-nav-gap);
 
     .animated {
       display: flex;
+      padding: 16px;
       width: 100%;
       height: 100%;
 

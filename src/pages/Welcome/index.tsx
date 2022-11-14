@@ -1,18 +1,21 @@
-import { FC, useState } from 'react';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { FC, useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { animated, useTransition } from '@react-spring/web';
 import { throttle } from '@/utils/throttle';
 import logoSvg from '@/assets/icons/logo.svg';
 import WelcomeAction from './Components/Action';
 import styles from './index.module.scss';
 import WelcomeRender from './Components/Render';
-
+import { useSwipe } from '@/hooks/useSwipe';
 
 const Welcome: FC = () => {
+  const main = useRef<HTMLElement>(null);
+  const route = useParams();
+  const { swiping, direction } = useSwipe(main);
   const location = useLocation(); // 获取当前路径
   const [extraStyle, setExtraStyle] = useState<{
-    position: 'absolute' | 'relative'
-  }>({ position: 'relative' })
+    position: 'absolute' | 'relative';
+  }>({ position: 'relative' });
   const transitions = useTransition(location.pathname, {
     from: () =>
       location.pathname === '/welcome/1'
@@ -22,25 +25,32 @@ const Welcome: FC = () => {
     leave: { transform: 'translateX(-100%)' },
     config: { duration: 300 },
     onStart: () => {
-      setExtraStyle({ position: 'absolute' })
+      setExtraStyle({ position: 'absolute' });
     },
     onRest: () => {
-      setExtraStyle({ position: 'relative' })
-    }
+      setExtraStyle({ position: 'relative' });
+    },
   });
 
-  const navigate = useNavigate();
-  const [params] = useSearchParams();
+  const nav = useNavigate();
   const pushRouter = throttle(() => {
-    const pageId = parseInt(params.get('id')?.toString() || '');
+    const pageId = parseInt(route?.id || '');
     if (pageId === 4) return;
-    navigate(`/welcome/${pageId + 1}`);
+    nav(`/welcome/${pageId + 1}`);
   }, 500);
   const backRouter = throttle(() => {
-    const pageId = parseInt(params.get('id')?.toString() || '');
+    const pageId = parseInt(route?.id?.toString() || '');
     if (pageId === 1) return;
     // router.back();
   }, 500);
+
+  useEffect(() => {
+    if (swiping && direction === 'left') {
+      pushRouter();
+    } else if (swiping && direction === 'right') {
+      backRouter();
+    }
+  }, [swiping, direction]);
 
   return (
     <div className={styles.wrapper}>
@@ -48,7 +58,7 @@ const Welcome: FC = () => {
         <img src={logoSvg} />
         <h1>山竹记账</h1>
       </header>
-      <main className={styles.main}>
+      <main className={styles.main} ref={main}>
         {transitions((style, pathname) => (
           <animated.div
             key={pathname}

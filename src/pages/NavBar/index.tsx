@@ -18,7 +18,7 @@ export const NavBar: FC<NavBarProps> = ({ icon, title }) => {
     if (return_to) {
       nav(return_to.toString());
     } else {
-      router.back();
+      // router.back();
     }
   };
   const openMenu: MouseEventHandler<SVGSVGElement> | undefined = () => {
