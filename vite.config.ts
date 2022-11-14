@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { join } from 'path';
-
+import Unocss from 'unocss/vite';
 import { svgstore } from './src/plugins/svgstore';
 
 // https://vitejs.dev/config/
@@ -11,7 +11,7 @@ export default defineConfig({
       '@': join(__dirname, 'src'),
     },
   },
-  plugins: [react(), svgstore()],
+  plugins: [Unocss(), react(), svgstore()],
   server: {
     proxy: {
       '/api/v1': {
