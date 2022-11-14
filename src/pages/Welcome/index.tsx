@@ -53,7 +53,9 @@ const Welcome: FC = () => {
             style={{ ...style, ...extraStyle }}
             className={styles.animated}
           >
-            <WelcomeRender pathname={pathname} />
+            <div className={styles.render_wraper}>
+              <WelcomeRender pathname={pathname} />
+            </div>
           </animated.div>
         ))}
       </main>

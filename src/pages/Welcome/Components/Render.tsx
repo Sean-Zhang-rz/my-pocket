@@ -38,7 +38,7 @@ const WelcomeRender: FC<{ pathname: string }> = (props) => {
 
   return (
     <div className={styles.card}>
-      <img src={item.icon} />
+      <img src={item.icon} className={styles.img} />
       <h2>
         {item.title}
         <br />
