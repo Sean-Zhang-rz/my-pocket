@@ -1,31 +1,34 @@
 import { FC } from "react";
 import { useParams } from "react-router-dom";
-import Icon, { IconName } from "@/pages/Components/Icon";
+import pig from '@/assets/icons/pig.svg'
+import clock from '@/assets/icons/clock.svg'
+import chart from '@/assets/icons/chart.svg'
+import cloud from '@/assets/icons/cloud.svg'
 import styles from './index.module.scss';
 
 
 const WelcomeRender: FC = () => {
   const slotsArray: {
-    icon: IconName;
+    icon: string;
     title: string;
     subTitle: string;
   }[] = [{
-    icon: 'pig',
+    icon: pig,
     title: '会挣钱',
     subTitle: '还会省钱',
   },
   {
-    icon: 'clock',
+    icon: clock,
     title: '每日提醒',
     subTitle: '不遗漏每一笔账单',
   },
   {
-    icon: 'chart',
+    icon: chart,
     title: '数据可视化',
     subTitle: '收支一目了然',
   },
   {
-    icon: 'cloud',
+    icon: cloud,
     title: '云备份',
     subTitle: '再也不怕数据丢失',
   }];
@@ -33,7 +36,7 @@ const WelcomeRender: FC = () => {
   const item = slotsArray[pageId - 1];
   return (
     <div className={styles.card}>
-      <Icon name={item.icon} />
+      <img src={item.icon} />
       <h2>
         {item.title}
         <br />

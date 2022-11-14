@@ -1,3 +1,5 @@
+@import '@/styles/vars.scss';
+
 .card {
   flex-grow: 1;
   display: flex;
@@ -19,7 +21,7 @@
   background: var(--welcome-bg-end);
   left: 0;
   bottom: 0;
-  width: 100%;
+  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;

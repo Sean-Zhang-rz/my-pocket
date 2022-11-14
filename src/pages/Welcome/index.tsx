@@ -40,11 +40,13 @@ const Welcome: FC = () => {
         <img src={logoSvg} />
         <h1>山竹记账</h1>
       </header>
-      {transitions((style, pathname) => (
-        <animated.div key={pathname} style={style}>
-          <WelcomeRender />
-        </animated.div>
-      ))}
+      <main className={styles.main}>
+        {transitions((style, pathname) => (
+          <animated.div key={pathname} style={style}>
+            <WelcomeRender />
+          </animated.div>
+        ))}
+      </main>
       <footer>
         <WelcomeAction />
       </footer>
