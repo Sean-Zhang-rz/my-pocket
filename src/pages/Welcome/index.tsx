@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { animated, useTransition } from '@react-spring/web';
 import { throttle } from '@/utils/throttle';
@@ -22,7 +22,6 @@ const Welcome: FC = () => {
 
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  // const { swiping, direction } = useSwipe(main);
   const pushRouter = throttle(() => {
     const pageId = parseInt(params.get('id')?.toString() || '');
     if (pageId === 4) return;

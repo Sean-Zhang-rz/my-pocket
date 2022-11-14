@@ -7,7 +7,7 @@ import Welcome from '../pages/Welcome';
 const router = createHashRouter([
   {
     path: '/',
-    element: <MainLayout title="山竹记账" icon="menu" />,
+    element: <Outlet />,
     errorElement: <ErrorPage />,
     children: [
       {
