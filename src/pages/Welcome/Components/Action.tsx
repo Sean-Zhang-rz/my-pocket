@@ -3,7 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import styles from './index.module.scss';
 
 const WelcomeAction: FC = () => {
-  const id = parseInt(useParams()?.id?.toString() || '');
+  const route = useParams();
+  const id = parseInt(route?.id?.toString() || '');
   const onClick = () => {
     localStorage.setItem('skipFeature', 'yes');
   };

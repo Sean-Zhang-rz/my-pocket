@@ -1,12 +1,12 @@
 import { FC, useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { animated, useTransition } from '@react-spring/web';
 import { throttle } from '@/utils/throttle';
 import logoSvg from '@/assets/icons/logo.svg';
+import { useSwipe } from '@/hooks/useSwipe';
+import WelcomeRender from './Components/Render';
 import WelcomeAction from './Components/Action';
 import styles from './index.module.scss';
-import WelcomeRender from './Components/Render';
-import { useSwipe } from '@/hooks/useSwipe';
 
 const Welcome: FC = () => {
   const main = useRef<HTMLElement>(null);
