@@ -22,7 +22,7 @@ export const useSwipe = (element: RefObject<HTMLElement | undefined>, options?: 
       y: end.y - start.y,
     };
   }, [start, end]);
-  const direction = useMemo(() => {
+  const direction = useMemo<'left' | 'right' | 'down' | 'up' | ''>(() => {
     if (!swiping) return '';
     if (!distance) return '';
     const { x, y } = distance;

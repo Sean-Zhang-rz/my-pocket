@@ -18,11 +18,14 @@ const Welcome: FC = () => {
   }>({ position: 'relative' });
   const transitions = useTransition(location.pathname, {
     from: () =>
-      location.pathname === '/welcome/1'
-        ? { transform: 'translateX(0%)' }
-        : { transform: 'translateX(100%)' },
+      direction === 'left'
+        ? location.pathname === '/welcome/1'
+          ? { transform: 'translateX(0%)' }
+          : { transform: 'translateX(100%)' }
+        : { transform: 'translateX(-100%)' },
     enter: { transform: 'translateX(0%)' },
-    leave: { transform: 'translateX(-100%)' },
+    leave: () =>
+      direction === 'left' ? { transform: 'translateX(-100%)' } : { transform: 'translateX(100%)' },
     config: { duration: 300 },
     onStart: () => {
       setExtraStyle({ position: 'absolute' });
