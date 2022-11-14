@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { animated, useTransition } from '@react-spring/web';
 import { throttle } from '@/utils/throttle';
@@ -10,6 +10,7 @@ import WelcomeRender from './Components/Render';
 
 const Welcome: FC = () => {
   const location = useLocation(); // 获取当前路径
+  const [extraStyle, setExtraStyle] = useState({ position: 'relative' })
   const transitions = useTransition(location.pathname, {
     from: () =>
       location.pathname === '/welcome/1'
@@ -18,6 +19,12 @@ const Welcome: FC = () => {
     enter: { transform: 'translateX(0%)' },
     leave: { transform: 'translateX(-100%)' },
     config: { duration: 300 },
+    onStart: () => {
+      setExtraStyle({ position: 'absolute' })
+    },
+    onRest: () => {
+      setExtraStyle({ position: 'relative' })
+    }
   });
 
   const navigate = useNavigate();
@@ -41,8 +48,12 @@ const Welcome: FC = () => {
       </header>
       <main className={styles.main}>
         {transitions((style, pathname) => (
-          <animated.div key={pathname} style={style}>
-            <WelcomeRender />
+          <animated.div
+            key={pathname}
+            style={{ ...style, ...extraStyle }}
+            className={styles.animated}
+          >
+            <WelcomeRender pathname={pathname} />
           </animated.div>
         ))}
       </main>

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, ReactNode, useRef } from "react";
 import { useParams } from "react-router-dom";
 import pig from '@/assets/icons/pig.svg'
 import clock from '@/assets/icons/clock.svg'
@@ -7,7 +7,7 @@ import cloud from '@/assets/icons/cloud.svg'
 import styles from './index.module.scss';
 
 
-const WelcomeRender: FC = () => {
+const WelcomeRender: FC<{ pathname: string }> = (props) => {
   const slotsArray: {
     icon: string;
     title: string;
@@ -32,8 +32,10 @@ const WelcomeRender: FC = () => {
     title: '云备份',
     subTitle: '再也不怕数据丢失',
   }];
-  const pageId = parseInt(useParams()?.id?.toString() || '');
+  const pageId = parseInt(props.pathname[props.pathname.length - 1] || '');
   const item = slotsArray[pageId - 1];
+  console.log();
+
   return (
     <div className={styles.card}>
       <img src={item.icon} />

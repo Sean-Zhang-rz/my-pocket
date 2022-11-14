@@ -23,6 +23,10 @@
     flex-direction: column;
     position: relative;
     margin: 16px 16px var(--welcome-nav-gap);
+    .animated {
+      width: 100%;
+      height: 100%;
+    }
 
     .enter_active,
     .leave_active {
