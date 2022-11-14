@@ -10,7 +10,9 @@ import WelcomeRender from './Components/Render';
 
 const Welcome: FC = () => {
   const location = useLocation(); // 获取当前路径
-  const [extraStyle, setExtraStyle] = useState({ position: 'relative' })
+  const [extraStyle, setExtraStyle] = useState<{
+    position: 'absolute' | 'relative'
+  }>({ position: 'relative' })
   const transitions = useTransition(location.pathname, {
     from: () =>
       location.pathname === '/welcome/1'
