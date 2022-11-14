@@ -16,7 +16,7 @@ const WelcomeAction: FC = () => {
       <Link to={id <= 3 ? `/welcome/${id + 1}` : '/start'}>
         {id <= 3 ? '下一页' : <span onClick={onClick}>完成</span>}
       </Link>
-      <Link className={id === 4 ? styles.fake : ''} to={'start'}>
+      <Link className={id === 4 ? styles.fake : ''} to={'/start'}>
         <span onClick={onClick}>跳过</span>
       </Link>
     </div>

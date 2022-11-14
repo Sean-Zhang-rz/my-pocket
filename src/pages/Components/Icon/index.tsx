@@ -24,7 +24,7 @@ interface IconProps {
 }
 export const Icon: FC<IconProps> = (props) => {
   return (
-    <svg className={styles.icon} onClick={props.onClick}>
+    <svg className={[styles.icon, props.className].join(' ')} onClick={props.onClick}>
       {props.name === 'none' ? null : <use xlinkHref={'#' + props.name}></use>}
     </svg>
   );

@@ -1,12 +1,14 @@
-import { FC, useMemo, useState } from 'react';
+import { FC, MouseEventHandler, ReactElement, useMemo, useState } from 'react';
 import styles from './index.module.scss';
 
 interface ButtonProps {
-  level: 'important' | 'normal' | 'danger';
-  type: 'submit' | 'button';
-  disabled: boolean;
-  autoSelfDisabled: boolean;
+  level?: 'important' | 'normal' | 'danger';
+  type?: 'submit' | 'button';
+  disabled?: boolean;
+  autoSelfDisabled?: boolean;
+  className?: string;
   onClick?: (e: MouseEvent) => void;
+  children?: ReactElement | string;
 }
 
 const Button: FC<ButtonProps> = (props) => {
@@ -26,6 +28,7 @@ const Button: FC<ButtonProps> = (props) => {
     <button
       className={[
         styles.btn,
+        props.className,
         props.disabled || _disabled ? styles.disabled : '',
         styles[props.level || 'normal'],
       ].join(' ')}
@@ -33,7 +36,7 @@ const Button: FC<ButtonProps> = (props) => {
       disabled={_disabled}
       onClick={onClick}
     >
-      {context.slots.default?.()}
+      {props.children}
     </button>
   );
 };

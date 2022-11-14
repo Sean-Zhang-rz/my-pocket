@@ -6,7 +6,7 @@ interface FloatButtonProps {
   name: IconName;
 }
 
-const FloatButton: FC<FloatButtonProps> = (props, context) => {
+const FloatButton: FC<FloatButtonProps> = (props) => {
   return (
     <div className={styles.float_button}>
       <Icon name={props.name} className={styles.icon} />

@@ -2,11 +2,11 @@ import { FC, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { animated, useTransition } from '@react-spring/web';
 import { throttle } from '@/utils/throttle';
-import logoSvg from '@/assets/icons/logo.svg';
 import { useSwipe } from '@/hooks/useSwipe';
 import WelcomeRender from './Components/Render';
 import WelcomeAction from './Components/Action';
 import styles from './index.module.scss';
+import Icon from '../Components/Icon';
 
 const Welcome: FC = () => {
   const main = useRef<HTMLElement>(null);
@@ -58,7 +58,7 @@ const Welcome: FC = () => {
   return (
     <div className={styles.wrapper}>
       <header>
-        <img src={logoSvg} />
+        <Icon name="logo" />
         <h1>山竹记账</h1>
       </header>
       <main className={styles.main} ref={main}>

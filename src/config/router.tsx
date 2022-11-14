@@ -1,6 +1,7 @@
 // hostory 模式路由 // hash模式
 import ErrorPage from '@/pages/Components/ErrorPage';
 import MainLayout from '@/pages/Components/MainLayout';
+import StartPage from '@/pages/StartPage/inedx';
 import { createHashRouter, Navigate, Outlet, RouteObject } from 'react-router-dom';
 import Welcome from '../pages/Welcome';
 
@@ -27,6 +28,10 @@ const router = createHashRouter([
             element: <Welcome />,
           },
         ],
+      },
+      {
+        path: '/start',
+        element: <StartPage />,
       },
     ],
   },
