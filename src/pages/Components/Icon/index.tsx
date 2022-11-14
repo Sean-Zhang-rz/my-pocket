@@ -20,7 +20,7 @@ export type IconName =
 interface IconProps {
   name: IconName;
   className?: string;
-  onClick: MouseEventHandler<SVGSVGElement> | undefined;
+  onClick?: MouseEventHandler<SVGSVGElement> | undefined;
 }
 export const Icon: FC<IconProps> = (props) => {
   return (

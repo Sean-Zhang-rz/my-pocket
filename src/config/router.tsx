@@ -20,7 +20,7 @@ const router = createHashRouter([
         children: [
           {
             index: true,
-            path: 'welcome/1',
+            element: <Navigate to="/welcome/1" replace />,
           },
           {
             path: ':id',

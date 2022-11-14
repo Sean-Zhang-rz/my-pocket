@@ -1,27 +1,25 @@
-// import { defineComponent } from 'vue';
-// import { RouterLink, useRoute } from 'vue-router';
-// import styles from './index.module.scss';
+import { FC } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import styles from './index.module.scss'
 
-// const WelcomeAction = defineComponent({
-//   setup: () => {
-//     const id = parseInt(useRoute()?.params?.id.toString());
-//     const onClick = () => {
-//       localStorage.setItem('skipFeature', 'yes');
-//     };
-//     return () => (
-//       <div class={styles.actions}>
-//         <RouterLink class={styles.fake} to="/start">
-//           跳过
-//         </RouterLink>
-//         <RouterLink to={id <= 3 ? `/welcome/${id + 1}` : '/start'}>
-//           {id <= 3 ? '下一页' : <span onClick={onClick}>完成</span>}
-//         </RouterLink>
-//         <RouterLink class={id === 4 ? styles.fake : ''} to="/start">
-//           <span onClick={onClick}>跳过</span>
-//         </RouterLink>
-//       </div>
-//     );
-//   },
-// });
-
-// export default WelcomeAction;
+const WelcomeAction: FC = () => {
+  const nav = useNavigate();
+  const id = parseInt(useParams()?.id?.toString() || '');
+  const onClick = () => {
+    localStorage.setItem('skipFeature', 'yes');
+  };
+  return (
+    <div className={styles.actions}>
+      <div className={styles.fake} onClick={() => nav("/start")}>
+        跳过
+      </div>
+      <div onClick={() => nav(id <= 3 ? `/welcome/${id + 1}` : '/start')}>
+        {id <= 3 ? '下一页' : <span onClick={onClick}>完成</span>}
+      </div>
+      <div className={id === 4 ? styles.fake : ''} onClick={() => nav("/start")}>
+        <span onClick={onClick}>跳过</span>
+      </div>
+    </div>
+  )
+}
+export default WelcomeAction
