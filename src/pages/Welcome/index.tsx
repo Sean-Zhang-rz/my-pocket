@@ -41,7 +41,7 @@ const Welcome: FC = () => {
   const backRouter = throttle(() => {
     const pageId = parseInt(route?.id?.toString() || '');
     if (pageId === 1) return;
-    // router.back();
+    nav(-1);
   }, 500);
 
   useEffect(() => {
