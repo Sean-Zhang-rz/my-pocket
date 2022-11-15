@@ -2,11 +2,11 @@
 import { createHashRouter, Navigate, Outlet } from 'react-router-dom';
 import ErrorPage from '@/Components/ErrorPage';
 import StartPage from '@/pages/StartPage/inedx';
-import Welcome from '../pages/Welcome';
 import WelcomeRedirection from '@/pages/Welcome/Components/WelocomeRedirection';
-import ItemList from '@/pages/Item';
-import ItemCreate from '@/pages/Item/components/Create';
-
+// import ItemList from '@/pages/Item';
+// import ItemCreate from '@/pages/Item/components/Create';
+import Welcome from '../pages/Welcome';
+import SignInPage from '@/pages/SignIn';
 const router = createHashRouter([
   {
     path: '/',
@@ -36,16 +36,20 @@ const router = createHashRouter([
         element: <StartPage />,
       },
       {
+        path: '/sign-in',
+        element: <SignInPage />
+      },
+      {
         path: '/items',
         element: <Outlet />,
         children: [
           {
             path: '',
-            element: <ItemList />,
+            // element: <ItemList />,
           },
           {
             path: 'create',
-            element: <ItemCreate />,
+            // element: <ItemCreate />,
           },
 
         ],
