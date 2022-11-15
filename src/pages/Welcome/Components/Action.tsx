@@ -1,12 +1,15 @@
+import useLocalStore from '@/stores/useLocalStore';
 import { FC } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import styles from './index.module.scss';
 
 const WelcomeAction: FC = () => {
   const route = useParams();
+  const { setSkipFeature } = useLocalStore()
   const id = parseInt(route?.id?.toString() || '');
   const onClick = () => {
-    localStorage.setItem('skipFeature', 'yes');
+    // localStorage.setItem('skipFeature', 'yes');
+    setSkipFeature(true)
   };
   return (
     <div className={styles.actions}>
