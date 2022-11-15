@@ -1,8 +1,8 @@
 import { TimeTabsLayout } from '@/pages/Components/TimeTabsLayout';
-import { ItemSummary } from '../Summary';
+// import { ItemSummary } from '../Summary';
 import { FC } from 'react';
 
 const ItemList: FC = () => {
-  return <TimeTabsLayout />,
+  return <TimeTabsLayout />
 };
 export default ItemList;

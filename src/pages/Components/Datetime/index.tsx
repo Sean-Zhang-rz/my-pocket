@@ -1,19 +1,14 @@
 import { Time } from '@/utils/time';
-import { computed, defineComponent, PropType } from 'vue';
+import { FC, useMemo } from 'react';
+interface DateTimeProps {
+  value: string | Date;
+  format?: string;
+}
 
-export const DateTime = defineComponent({
-  props: {
-    value: {
-      type: [Date, String] as PropType<string | Date>,
-      required: true,
-    },
-    format: {
-      type: String,
-      default: 'YYYY-MM-DD HH:mm:ss',
-    },
-  },
-  setup: (props) => {
-    const displayTime = computed(() => new Time(props.value).format(props.format));
-    return () => <div>{displayTime.value}</div>;
-  },
-});
+const DateTime: FC<DateTimeProps> = ({
+  value, format = 'YYYY-MM-DD HH:mm:ss'
+}) => {
+  const displayTime = useMemo(() => new Time(value).format(format), []);
+  return <div>{displayTime}</div>;
+};
+export default DateTime

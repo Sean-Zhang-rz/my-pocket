@@ -7,7 +7,7 @@ interface MainLayoutProps {
   icon: IconName;
   children: ReactElement;
 }
-export const MainLayout: FC<MainLayoutProps> = (props) => {
+const MainLayout: FC<MainLayoutProps> = (props) => {
   return (
     <div>
       <NavBar title={props.title} icon={props.icon} />

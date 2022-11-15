@@ -1,7 +1,7 @@
-import { defineComponent, PropType, reactive, ref } from 'vue';
-import { Overlay, Toast } from 'vant';
+// import { defineComponent, PropType, reactive, ref } from 'vue';
+// import { Overlay, Toast } from 'vant';
 import { Time } from '@/utils/time';
-import { MainLayout } from '@/components/MainLayout';
+import MainLayout from '@/Components/MainLayout';
 import { Tabs } from '@/components/Tabs';
 import { Tab } from '@/components/Tabs/Tab';
 import { Form } from '@/components/Form';

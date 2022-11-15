@@ -1,6 +1,6 @@
 import { defineComponent, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { MainLayout } from '@/components/MainLayout';
+import MainLayout from '@/Components/MainLayout';
 import { Tabs } from '@/components/Tabs';
 import { Tab } from '@/components/Tabs/Tab';
 import { InputPad } from '@/components/InputPad';

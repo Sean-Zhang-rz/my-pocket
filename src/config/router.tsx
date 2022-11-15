@@ -4,6 +4,8 @@ import ErrorPage from '@/Components/ErrorPage';
 import StartPage from '@/pages/StartPage/inedx';
 import Welcome from '../pages/Welcome';
 import WelcomeRedirection from '@/pages/Welcome/Components/WelocomeRedirection';
+import ItemList from '@/pages/Item';
+import ItemCreate from '@/pages/Item/components/Create';
 
 const router = createHashRouter([
   {
@@ -35,15 +37,15 @@ const router = createHashRouter([
       },
       {
         path: '/items',
-        element: () => import('@/pages/Item'),
+        element: <Outlet />,
         children: [
           {
             path: '',
-            component: () => import('@/pages/Item/components/List'),
+            element: <ItemList />,
           },
           {
             path: 'create',
-            component: () => import('@/pages/Item/components/Create'),
+            element: <ItemCreate />,
           },
 
         ],
