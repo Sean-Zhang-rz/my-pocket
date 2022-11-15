@@ -12,20 +12,20 @@ const Tabs: FC<TabProps> = (props) => {
   // emits: ['update:selected'],
   const childrenArray = props.children
   const cp = props.classPrefix;
-  useEffect(() => {
-    if (!childrenArray) return () => null;
-    childrenArray.forEach((v) => {
-      if (typeof v.type === 'symbol') return
-      if (v.type !== Tab) {
-        throw new Error('<Tabs> only accepts <Tab> as children');
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   if (!childrenArray) return () => null;
+  //   childrenArray.forEach((v) => {
+  //     if (typeof v.type === 'symbol') return
+  //     if (v.type !== Tab) {
+  //       throw new Error('<Tabs> only accepts <Tab> as children');
+  //     }
+  //   });
+  // }, []);
 
 
   return (
     <div className={[styles.tabs, cp + '_tabs'].join(' ')}>
-      <ol className={styles.tabs_nav}>
+      {/* <ol className={styles.tabs_nav}>
         {childrenArray.filter(v => v.type === Tab).map((item) => (
           <li
             className={[
@@ -39,14 +39,12 @@ const Tabs: FC<TabProps> = (props) => {
             {item.props?.name || item.props?.id}
           </li>
         ))}
-      </ol>
+      </ol> */}
       <div className={styles.tab_content}>
-        {childrenArray.find((content) => content.props?.id === props.selected)}
+        {/* {childrenArray.find((content) => content.props?.id === props.selected)} */}
       </div>
     </div>
   );
-
 }
-};
 
 export default Tabs

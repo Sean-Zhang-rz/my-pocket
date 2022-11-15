@@ -1,18 +1,15 @@
 
 import { FC, useState } from 'react';
-import MainLayout from '@/Components/MainLayout';
-import Form from '@/Components/Form';
-import FormItem from '@/Components/Form/Components/FormItem';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Rules } from '@/api/types/form';
-import Icon from '@/Components/Icon';
-import Button from '@/Components/Button';
+import { Icon, Button, Form, FormItem, MainLayout } from '@/Components/index'
 import { getValidationCode, signIn } from '@/api/common';
 import { onError } from '@/utils/onError';
 // import { useMeStore } from '@/stores/useMeStore';
 // import { Toast } from 'vant';
 import TimerButton from '../Components/TimerButton';
 import styles from './index.module.scss';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+
 
 
 const SignInPage: FC = () => {
@@ -54,9 +51,9 @@ const SignInPage: FC = () => {
           <h1 className={styles.appName}>山竹记账</h1>
         </div>
         <Form formData={formData} rules={rules} onSubmit={onSubmit}>
-          <FormItem label="邮箱地址" prop="email" placeholder="请输入邮箱，然后点击发送验证码" />
+          {/* <FormItem label="邮箱地址" prop="email" placeholder="请输入邮箱，然后点击发送验证码" />
           <FormItem label="验证码" prop="code" placeholder="请输入六位数字">
-            {/* {{
+            {{
               button: () => (
                 <TimerButton
                   ref={refValidationCode}
@@ -64,13 +61,13 @@ const SignInPage: FC = () => {
                   onClick={onClickSendValidationCode}
                 />
               ),
-            }} */}
+            }}
           </FormItem>
           <FormItem style={{ paddingTop: '96px' }}>
             <Button type="submit" className={styles.btn}>
               登录
             </Button>
-          </FormItem>
+          </FormItem> */}
         </Form>
       </div>
     </MainLayout>
