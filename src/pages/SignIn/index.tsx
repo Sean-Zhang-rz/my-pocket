@@ -14,13 +14,10 @@ import styles from './index.module.scss';
 
 const SignInPage: FC = () => {
   // const meStore = useMeStore();
-  const route = useSearchParams()
+  const [route] = useSearchParams()
   const nav = useNavigate()
   const [refValidationCode, setRefValidationCode] = useState<any>('');
-  const [formData, setFormData] = useState({
-    email: '',
-    code: '',
-  });
+  const [formData, setFormData] = useState({ email: '', code: '' });
   const rules: Rules[] = [
     { key: 'email', type: 'required', message: '必填' },
     { key: 'email', type: 'pattern', regex: /.+@.+/, message: '邮箱地址不正确' },
@@ -33,14 +30,14 @@ const SignInPage: FC = () => {
       return;
     }
     await getValidationCode({ email: formData.email }).catch(onError);
-    refValidationCode.value.startCount();
+    refValidationCode.startCount();
   };
   const onSubmit = async (e: Event) => {
     const res = await signIn(formData).catch(onError);
     localStorage.setItem('jwt', res.data.jwt);
-    // const returnTo = route.query.return_to?.toString();
+    const returnTo = route.get('return_to')
     // meStore.refreshMe();
-    // nav(returnTo || '/start', { replace: true });
+    nav(returnTo || '/start', { replace: true });
   };
 
   return (
@@ -51,8 +48,8 @@ const SignInPage: FC = () => {
           <h1 className={styles.appName}>山竹记账</h1>
         </div>
         <Form formData={formData} rules={rules} onSubmit={onSubmit}>
-          {/* <FormItem label="邮箱地址" prop="email" placeholder="请输入邮箱，然后点击发送验证码" />
-          <FormItem label="验证码" prop="code" placeholder="请输入六位数字">
+          <FormItem label="邮箱地址" prop="email" placeholder="请输入邮箱，然后点击发送验证码" />
+          {/* <FormItem label="验证码" prop="code" placeholder="请输入六位数字">
             {{
               button: () => (
                 <TimerButton
@@ -62,12 +59,12 @@ const SignInPage: FC = () => {
                 />
               ),
             }}
-          </FormItem>
+          </FormItem> */}
           <FormItem style={{ paddingTop: '96px' }}>
             <Button type="submit" className={styles.btn}>
               登录
             </Button>
-          </FormItem> */}
+          </FormItem>
         </Form>
       </div>
     </MainLayout>

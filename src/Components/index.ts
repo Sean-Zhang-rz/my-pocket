@@ -6,6 +6,8 @@ import Form from '@/Components/Form';
 import FormItem from '@/Components/Form/Components/FormItem';
 import Tabs from '@/Components/Tabs'
 import Tab from '@/Components/Tabs/Tab'
+import NavBar from '@/Components/NavBar'
+import OverlayIcon from '@/Components/OverlayIcon'
 
 export {
   Button,
@@ -15,5 +17,7 @@ export {
   Form,
   FormItem,
   Tabs,
-  Tab
+  Tab,
+  NavBar,
+  OverlayIcon
 }

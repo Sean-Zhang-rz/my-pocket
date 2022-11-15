@@ -6,15 +6,15 @@ import { Time } from '@/utils/time';
 import styles from './index.module.scss';
 
 interface FormItemProps {
-  prop: string;
-  modelValue: string | number;
-  label: string;
-  rule: Rules;
-  type: 'date' | 'validation' | 'select';
-  options: { value: string; text: string }[];
-  error: string,
-  placeholder: string,
-  onClick: ((e: MouseEvent) => void) | undefined;
+  prop?: string;
+  modelValue?: string | number;
+  label?: string;
+  rule?: Rules;
+  type?: 'date' | 'validation' | 'select';
+  options?: { value: string; text: string }[];
+  error?: string,
+  placeholder?: string,
+  onClick?: ((e: MouseEvent) => void) | undefined;
   children?: ReactNode
 }
 const FormItem: FC<FormItemProps> = (props) => {
