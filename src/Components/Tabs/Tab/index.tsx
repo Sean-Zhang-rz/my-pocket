@@ -1,16 +1,13 @@
-import { defineComponent } from 'vue';
+import { FC, ReactNode } from "react";
 
-export const Tab = defineComponent({
-  props: {
-    id: String,
-    name: {
-      type: String,
-    },
-    onClick: {
-      type: Function,
-    },
-  },
-  setup: (props, context) => {
-    return () => <div onClick={props?.onClick?.()}>{context.slots.default?.()}</div>;
-  },
-});
+interface TabProps {
+  id: string;
+  name: string;
+  onClick: Function;
+  children?: ReactNode;
+}
+const Tab: FC<TabProps> = (props) => {
+  return <div onClick={props?.onClick?.()}>{props.children}</div>;
+};
+
+export default Tab;
