@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import Icon from '../Components/Icon';
-import MainLayout from '../Components/MainLayout';
-import Button from '../Components/Button';
-import FloatButton from '../Components/FloatButton';
+import Icon from '@/Components/Icon';
+import MainLayout from '@/Components/MainLayout';
+import Button from '@/Components/Button';
+import FloatButton from '@/Components/FloatButton';
 import styles from './index.module.scss';
 
 const StartPage: FC = () => {

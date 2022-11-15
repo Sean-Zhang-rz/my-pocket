@@ -1,6 +1,6 @@
 import { FC, MouseEventHandler, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import Icon, { IconName } from '../Components/Icon';
+import Icon, { IconName } from '@/Components/Icon';
 import OverlayIcon from '../OverlayIcon';
 
 import styles from './index.module.scss';

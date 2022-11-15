@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import Icon from '../Components/Icon';
+import Icon from '@/Components/Icon';
 import styles from './index.module.scss';
 interface OverlayIconProps {
   onClose: () => void;
@@ -8,7 +8,7 @@ interface OverlayIconProps {
 export const OverlayIcon: FC<OverlayIconProps> = (props) => {
   const nav = useNavigate();
   const route = useParams();
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
   const onSignOut = async () => {
     // await Dialog.confirm({
     //   title: '确认',

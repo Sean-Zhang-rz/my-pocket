@@ -3,10 +3,11 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { animated, useTransition } from '@react-spring/web';
 import { throttle } from '@/utils/throttle';
 import { useSwipe } from '@/hooks/useSwipe';
+import Icon from '@/Components/Icon';
 import WelcomeRender from './Components/Render';
 import WelcomeAction from './Components/Action';
 import styles from './index.module.scss';
-import Icon from '../Components/Icon';
+
 
 const Welcome: FC = () => {
   const main = useRef<HTMLElement>(null);

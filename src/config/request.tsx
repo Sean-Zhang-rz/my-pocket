@@ -38,7 +38,6 @@ export class Request {
         const route = useParams();
         // Toast.clear();
         if (error.response.status === 401) {
-          // router.push(`/sign_in?return_to=${route.fullPath}`);
           navigate(`/sign_in?return_to=${route.fullPath}`);
           return;
         }
