@@ -1,39 +1,41 @@
-import { FC, useMemo, useRef, useState } from 'react';
+import { forwardRef, ForwardRefRenderFunction, MouseEvent, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import Button from '@/Components/Button';
 
 interface TimerButtonProps {
-  countFrom: number;
+  countFrom?: number;
   disabled: boolean;
-  onClick?: (e?: MouseEvent) => void;
+  onClick?: (e?: MouseEvent<HTMLButtonElement>) => void;
 }
-const TimerButton: FC<TimerButtonProps> = (props) => {
+interface TimerButtonRef {
+  startCount: () => void
+}
+const TimerButton: ForwardRefRenderFunction<TimerButtonRef, TimerButtonProps> = ({
+  countFrom = 60,
+  disabled = false,
+  onClick
+}, ref) => {
   const timer = useRef<number | NodeJS.Timer>()
-
-  const [count, setCount] = useState<number>(props.countFrom);
-
+  const [count, setCount] = useState<number>(countFrom);
   const isCounting = useMemo(() => !!timer.current, [timer.current]);
-  const startCount = () => {
-    timer.current = setInterval(() => {
-      setCount(pre => pre - 1)
-      if (count === 0) {
-        clearInterval(timer.current as NodeJS.Timer);
-        timer.current = undefined;
-        setCount(props.countFrom);
-      }
-    }, 1000);
-  };
+  useImperativeHandle(ref, () => ({
+    startCount: () => {
+      console.log('2. startCount');
 
-  // context.expose({ startCount });
+      timer.current = setInterval(() => {
+        setCount(pre => pre - 1)
+        if (count === 0) {
+          clearInterval(timer.current as NodeJS.Timer);
+          timer.current = undefined;
+          setCount(countFrom);
+        }
+      }, 1000);
+    }
+  }), [])
   return (
-    <Button disabled={isCounting} onClick={props.onClick}>
+    <Button disabled={isCounting} onClick={onClick}>
       {isCounting ? `${count}秒后重新发送` : '发送验证码'}
     </Button>
   );
-
 };
-TimerButton.defaultProps = {
-  countFrom: 60,
-  disabled: false,
-  onClick: undefined
-}
-export default TimerButton;
+
+export default forwardRef(TimerButton);

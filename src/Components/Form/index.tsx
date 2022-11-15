@@ -1,19 +1,18 @@
 
-import React, { FC, ReactElement, ReactNode, useState } from 'react';
+import React, { FC, FormEvent, ReactElement, useState } from 'react';
 import FormDataProps, { Rules } from '@/api/types/form';
-import styles from './index.module.scss';
 import { validate } from '@/utils/validateForm';
-
+import styles from './index.module.scss';
 
 interface FormProps {
   formData: FormDataProps;
   rules: Rules[];
-  onSubmit: (e: Event) => void;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   children?: ReactElement;
 }
 const Form: FC<FormProps> = (props) => {
   const [errors, setErrors] = useState<{ [k in keyof typeof props.formData]?: string[] }>({});
-  const onSubmit = (e: Event) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validate = checkInput();
     if (validate) props.onSubmit?.(e)
@@ -34,19 +33,14 @@ const Form: FC<FormProps> = (props) => {
   };
   return (
     <form className={styles.form} onSubmit={onSubmit}>
-      {React.Children?.map(props.children, (c) => {
-        // return (
-        //   <c
-        //   // formDara={FormData}
-        //   // v-model={props.formData[c?.props?.prop]}
-        //   // error={errors[c?.props?.prop] ? errors[c?.props?.prop]?.[0] : '　'}
-        //   />
-        // );
+      {React.Children.map(props.children, (c) => {
+        if (!c) return null
         const itemProps = {
-          ...c.props,
+          value: props.formData[c?.props?.prop],
           error: errors[c?.props?.prop] ? errors[c?.props?.prop]?.[0] : '　',
         }
-        return React.cloneElement(c, c.props)
+
+        return React.cloneElement(c, itemProps)
       })}
     </form>
   );

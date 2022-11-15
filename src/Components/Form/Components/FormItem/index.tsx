@@ -1,41 +1,41 @@
-import { FC, ReactNode, useMemo, useState } from 'react';
+import { cloneElement, CSSProperties, FC, useMemo, useState } from 'react';
 import FormDataProps, { Rules } from '@/api/types/form';
 // import { DatetimePicker, Popup } from 'vant';
 import Button from '@/Components/Button';
 import { Time } from '@/utils/time';
 import styles from './index.module.scss';
+import { Children } from 'react';
+import { ReactElement } from 'react';
 
 interface FormItemProps {
   prop?: string;
-  modelValue?: string | number;
+  value?: string | number;
   label?: string;
   rule?: Rules;
   type?: 'date' | 'validation' | 'select';
   options?: { value: string; text: string }[];
-  error?: string,
-  placeholder?: string,
+  error?: string;
+  placeholder?: string;
+  style?: CSSProperties;
+  button?: ReactElement;
   onClick?: ((e: MouseEvent) => void) | undefined;
-  children?: ReactNode
+  children?: ReactElement
 }
 const FormItem: FC<FormItemProps> = (props) => {
-
-  // emits: ['update:modelValue'],
-
   const [refDateVisible, setRefDateVisible] = useState(false);
   const content = useMemo(() => {
-    const children = props.children;
-    // const button = context.slots.button?.();
     return (
       <div className={styles.form_item_value}>
-        {children ? (
-          // children.map((c) => <c class={props.error?.length! > 1 ? styles.error : ''} />)
-          null
+        {props.children ? (
+          Children.map(props.children, (c) => c
+            ? cloneElement(c, { className: props.error?.length! > 1 ? styles.error : '' }) : null
+          )
         ) : (
           <>
             {props.type === 'select' ? (
               <select
                 className={[styles.form_item, styles.select].join(' ')}
-                value={props.modelValue}
+                value={props.value}
                 onChange={(e: any) => {
                   // context.emit('update:modelValue', e.target.value);
                 }}
@@ -48,7 +48,7 @@ const FormItem: FC<FormItemProps> = (props) => {
               <>
                 {' '}
                 <input
-                  value={props.modelValue}
+                  value={props.value}
                   readOnly={props.type === 'date'}
                   placeholder={props.placeholder}
                   onInput={(e: any) => {
@@ -62,7 +62,7 @@ const FormItem: FC<FormItemProps> = (props) => {
                   className={[
                     styles.form_item,
                     styles.input,
-                    // button ? styles.input_with_button : '',
+                    props.button ? styles.input_with_button : '',
                     props.error?.length! > 1 ? styles.error : '',
                   ].join(' ')}
                 />
@@ -81,17 +81,17 @@ const FormItem: FC<FormItemProps> = (props) => {
                   // </Popup>
                   null
                 ) : null}
-                {/* {button ? <div className={[styles.slots_button]}>{button}</div> : null} */}
+                {props.button ? <div className={styles.slots_button}>{props.button}</div> : null}
               </>
             )}
           </>
         )}
       </div>
     );
-  }, []);
+  }, [props.children, props.type, props.value]);
 
   return (
-    <div className={styles.form_row}>
+    <div className={styles.form_row} style={props.style}>
       <label className={styles.form_label}>
         <span className={styles.form_item_name}>{props.label}</span>
         {content}

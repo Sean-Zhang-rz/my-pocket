@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler, ReactElement, useMemo, useState } from 'react';
+import { FC, MouseEvent, ReactElement, useMemo, useState } from 'react';
 import styles from './index.module.scss';
 
 interface ButtonProps {
@@ -7,7 +7,7 @@ interface ButtonProps {
   disabled?: boolean;
   autoSelfDisabled?: boolean;
   className?: string;
-  onClick?: (e: MouseEvent) => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   children?: ReactElement | string;
 }
 
@@ -17,7 +17,7 @@ const Button: FC<ButtonProps> = (props) => {
     if (!props.autoSelfDisabled) return props.disabled;
     return selfDisabled || props.disabled;
   }, [props.autoSelfDisabled, props.disabled]);
-  const onClick = (e: MouseEvent) => {
+  const onClick = (e: MouseEvent<HTMLButtonElement>) => {
     props.onClick?.(e);
     setSelfDisabled(true);
     setTimeout(() => {
