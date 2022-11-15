@@ -19,7 +19,7 @@ interface FormItemProps {
   style?: CSSProperties;
   button?: ReactElement;
   onClick?: ((e: MouseEvent) => void) | undefined;
-  children?: ReactElement
+  children?: ReactElement;
 }
 const FormItem: FC<FormItemProps> = (props) => {
   const [refDateVisible, setRefDateVisible] = useState(false);
@@ -27,8 +27,8 @@ const FormItem: FC<FormItemProps> = (props) => {
     return (
       <div className={styles.form_item_value}>
         {props.children ? (
-          Children.map(props.children, (c) => c
-            ? cloneElement(c, { className: props.error?.length! > 1 ? styles.error : '' }) : null
+          Children.map(props.children, (c) =>
+            c ? cloneElement(c, { className: props.error?.length! > 1 ? styles.error : '' }) : null
           )
         ) : (
           <>
@@ -56,7 +56,7 @@ const FormItem: FC<FormItemProps> = (props) => {
                   }}
                   onClick={() => {
                     if (props.type === 'date') {
-                      setRefDateVisible(true)
+                      setRefDateVisible(true);
                     }
                   }}
                   className={[
@@ -66,21 +66,21 @@ const FormItem: FC<FormItemProps> = (props) => {
                     props.error?.length! > 1 ? styles.error : '',
                   ].join(' ')}
                 />
-                {props.type === 'date' ? (
-                  // <Popup position="bottom" v-model:show={refDateVisible} teleport="body">
-                  //   <DatetimePicker
-                  //     modelValue={props.modelValue ? new Date(props.modelValue) : new Date()}
-                  //     type="date"
-                  //     title="选择年月日"
-                  //     onConfirm={(date: Date) => {
-                  //       context.emit('update:modelValue', new Time(date).format());
-                  //       refDateVisible.value = false;
-                  //     }}
-                  //     onCancel={() => (refDateVisible.value = false)}
-                  //   />
-                  // </Popup>
-                  null
-                ) : null}
+                {props.type === 'date'
+                  ? // <Popup position="bottom" v-model:show={refDateVisible} teleport="body">
+                    //   <DatetimePicker
+                    //     modelValue={props.modelValue ? new Date(props.modelValue) : new Date()}
+                    //     type="date"
+                    //     title="选择年月日"
+                    //     onConfirm={(date: Date) => {
+                    //       context.emit('update:modelValue', new Time(date).format());
+                    //       refDateVisible.value = false;
+                    //     }}
+                    //     onCancel={() => (refDateVisible.value = false)}
+                    //   />
+                    // </Popup>
+                    null
+                  : null}
                 {props.button ? <div className={styles.slots_button}>{props.button}</div> : null}
               </>
             )}
@@ -101,5 +101,5 @@ const FormItem: FC<FormItemProps> = (props) => {
       </label>
     </div>
   );
-}
-export default FormItem
+};
+export default FormItem;

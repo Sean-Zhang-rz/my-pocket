@@ -1,4 +1,3 @@
-
 import React, { FC, FormEvent, ReactElement, useState } from 'react';
 import FormDataProps, { Rules } from '@/api/types/form';
 import { validate } from '@/utils/validateForm';
@@ -15,35 +14,34 @@ const Form: FC<FormProps> = (props) => {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validate = checkInput();
-    if (validate) props.onSubmit?.(e)
+    if (validate) props.onSubmit?.(e);
   };
   const checkInput = () => {
     if (props.formData && props.rules) {
-      Object.keys(props.formData).forEach(key => {
-        setErrors((pre) => ({ ...pre, [key]: undefined }))
-      })
-      const err = validate(props.formData, props.rules)
+      Object.keys(props.formData).forEach((key) => {
+        setErrors((pre) => ({ ...pre, [key]: undefined }));
+      });
+      const err = validate(props.formData, props.rules);
       if (Object.keys(err).length) {
         Object.assign(errors, err);
-        return false
+        return false;
       } else {
-        return true
+        return true;
       }
     }
   };
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       {React.Children.map(props.children, (c) => {
-        if (!c) return null
+        if (!c) return null;
         const itemProps = {
           value: props.formData[c?.props?.prop],
           error: errors[c?.props?.prop] ? errors[c?.props?.prop]?.[0] : '　',
-        }
+        };
 
-        return React.cloneElement(c, itemProps)
+        return React.cloneElement(c, itemProps);
       })}
     </form>
   );
-
 };
-export default Form
+export default Form;

@@ -1,8 +1,7 @@
-
 import { FC, FormEvent, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Rules } from '@/api/types/form';
-import { Icon, Button, Form, FormItem, MainLayout } from '@/Components/index'
+import { Icon, Button, Form, FormItem, MainLayout } from '@/Components/index';
 import { getValidationCode, signIn } from '@/api/common';
 import { onError } from '@/utils/onError';
 // import { useMeStore } from '@/stores/useMeStore';
@@ -11,13 +10,11 @@ import TimerButton from '../Components/TimerButton';
 import styles from './index.module.scss';
 import { useRef } from 'react';
 
-
-
 const SignInPage: FC = () => {
   // const meStore = useMeStore();
-  const [route] = useSearchParams()
-  const nav = useNavigate()
-  const refValidationCode = useRef<{ startCount: () => void }>(null)
+  const [route] = useSearchParams();
+  const nav = useNavigate();
+  const refValidationCode = useRef<{ startCount: () => void }>(null);
   const [formData, setFormData] = useState({ email: '770899447@qq.com', code: '' });
   const rules: Rules[] = [
     { key: 'email', type: 'required', message: '必填' },
@@ -38,7 +35,7 @@ const SignInPage: FC = () => {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     const res = await signIn(formData).catch(onError);
     localStorage.setItem('jwt', res.data.jwt);
-    const returnTo = route.get('return_to')
+    const returnTo = route.get('return_to');
     // meStore.refreshMe();
     nav(returnTo || '/start', { replace: true });
   };
@@ -53,11 +50,18 @@ const SignInPage: FC = () => {
         <Form formData={formData} rules={rules} onSubmit={onSubmit}>
           <>
             <FormItem label="邮箱地址" prop="email" placeholder="请输入邮箱，然后点击发送验证码" />
-            <FormItem label="验证码" prop="code" placeholder="请输入六位数字" button={<TimerButton
-              ref={refValidationCode}
-              disabled={!formData.email}
-              onClick={onClickSendValidationCode}
-            />} />
+            <FormItem
+              label="验证码"
+              prop="code"
+              placeholder="请输入六位数字"
+              button={
+                <TimerButton
+                  ref={refValidationCode}
+                  disabled={!formData.email}
+                  onClick={onClickSendValidationCode}
+                />
+              }
+            />
             <FormItem style={{ paddingTop: '96px' }}>
               <Button type="submit" className={styles.btn}>
                 登录
@@ -68,5 +72,5 @@ const SignInPage: FC = () => {
       </div>
     </MainLayout>
   );
-}
+};
 export default SignInPage;
