@@ -1,5 +1,5 @@
 
-import React, { FC, FormEvent, ReactElement, useState } from 'react';
+import React, { Dispatch, FC, FormEvent, ReactElement, useState } from 'react';
 import FormDataProps, { Rules } from '@/api/types/form';
 import { validate } from '@/utils/validateForm';
 import styles from './index.module.scss';
@@ -8,10 +8,16 @@ interface FormProps {
   formData: FormDataProps;
   rules: Rules[];
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  children?: ReactElement;
+  children?: ReactElement[];
+}
+function useForm<T>(initialForm: T) {
+  const [data, setData] = useState<T>(initialForm);
+  return { data, setData }
 }
 const Form: FC<FormProps> = (props) => {
+  const form = useForm(props.formData)
   const [errors, setErrors] = useState<{ [k in keyof typeof props.formData]?: string[] }>({});
+
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validate = checkInput();

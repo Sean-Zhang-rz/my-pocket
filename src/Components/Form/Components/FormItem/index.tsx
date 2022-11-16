@@ -1,11 +1,10 @@
-import { cloneElement, CSSProperties, FC, useMemo, useState } from 'react';
+import { cloneElement, CSSProperties, FC, useMemo, useState, Children, ReactElement } from 'react';
 import FormDataProps, { Rules } from '@/api/types/form';
 // import { DatetimePicker, Popup } from 'vant';
 import Button from '@/Components/Button';
 import { Time } from '@/utils/time';
+
 import styles from './index.module.scss';
-import { Children } from 'react';
-import { ReactElement } from 'react';
 
 interface FormItemProps {
   prop?: string;
@@ -21,7 +20,23 @@ interface FormItemProps {
   onClick?: ((e: MouseEvent) => void) | undefined;
   children?: ReactElement
 }
+
+const SelectItem: FC<FormItemProps> = (props) => {
+  return <select
+    className={[styles.form_item, styles.select].join(' ')}
+    value={props.value}
+    onChange={(e: any) => {
+      // context.emit('update:modelValue', e.target.value);
+    }}
+  >
+    {props.options?.map((option) => (
+      <option value={option.value}>{option.text}</option>
+    ))}
+  </select>
+}
+
 const FormItem: FC<FormItemProps> = (props) => {
+
   const [refDateVisible, setRefDateVisible] = useState(false);
   const content = useMemo(() => {
     return (
@@ -32,58 +47,21 @@ const FormItem: FC<FormItemProps> = (props) => {
           )
         ) : (
           <>
-            {props.type === 'select' ? (
-              <select
-                className={[styles.form_item, styles.select].join(' ')}
-                value={props.value}
-                onChange={(e: any) => {
-                  // context.emit('update:modelValue', e.target.value);
-                }}
-              >
-                {props.options?.map((option) => (
-                  <option value={option.value}>{option.text}</option>
-                ))}
-              </select>
-            ) : (
-              <>
-                {' '}
-                <input
-                  value={props.value}
-                  readOnly={props.type === 'date'}
-                  placeholder={props.placeholder}
-                  onInput={(e: any) => {
-                    // context.emit('update:modelValue', e.target.value);
-                  }}
-                  onClick={() => {
-                    if (props.type === 'date') {
-                      setRefDateVisible(true)
-                    }
-                  }}
-                  className={[
-                    styles.form_item,
-                    styles.input,
-                    props.button ? styles.input_with_button : '',
-                    props.error?.length! > 1 ? styles.error : '',
-                  ].join(' ')}
-                />
-                {props.type === 'date' ? (
-                  // <Popup position="bottom" v-model:show={refDateVisible} teleport="body">
-                  //   <DatetimePicker
-                  //     modelValue={props.modelValue ? new Date(props.modelValue) : new Date()}
-                  //     type="date"
-                  //     title="选择年月日"
-                  //     onConfirm={(date: Date) => {
-                  //       context.emit('update:modelValue', new Time(date).format());
-                  //       refDateVisible.value = false;
-                  //     }}
-                  //     onCancel={() => (refDateVisible.value = false)}
-                  //   />
-                  // </Popup>
-                  null
-                ) : null}
-                {props.button ? <div className={styles.slots_button}>{props.button}</div> : null}
-              </>
-            )}
+            {' '}
+            <input
+              value={props.value}
+              readOnly={props.type === 'date'}
+              placeholder={props.placeholder}
+              onInput={(e: any) => {
+              }}
+              className={[
+                styles.form_item,
+                styles.input,
+                props.button ? styles.input_with_button : '',
+                props.error?.length! > 1 ? styles.error : '',
+              ].join(' ')}
+            />
+            {props.button ? <div className={styles.slots_button}>{props.button}</div> : null}
           </>
         )}
       </div>
