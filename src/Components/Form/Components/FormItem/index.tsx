@@ -18,7 +18,7 @@ interface FormItemProps {
   style?: CSSProperties;
   button?: ReactElement;
   onClick?: ((e: MouseEvent) => void) | undefined;
-  children?: ReactElement
+  children?: ReactElement;
 }
 
 const SelectItem: FC<FormItemProps> = (props) => {
@@ -42,8 +42,8 @@ const FormItem: FC<FormItemProps> = (props) => {
     return (
       <div className={styles.form_item_value}>
         {props.children ? (
-          Children.map(props.children, (c) => c
-            ? cloneElement(c, { className: props.error?.length! > 1 ? styles.error : '' }) : null
+          Children.map(props.children, (c) =>
+            c ? cloneElement(c, { className: props.error?.length! > 1 ? styles.error : '' }) : null
           )
         ) : (
           <>
@@ -79,5 +79,5 @@ const FormItem: FC<FormItemProps> = (props) => {
       </label>
     </div>
   );
-}
-export default FormItem
+};
+export default FormItem;

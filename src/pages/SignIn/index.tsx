@@ -1,7 +1,7 @@
 import { FC, FormEvent, useState, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Rules } from '@/api/types/form';
-import { Icon, Button, Form, FormItem, MainLayout } from '@/Components/index'
+import { Icon, Button, Form, FormItem, MainLayout } from '@/Components/index';
 import { getValidationCode, signIn } from '@/api/common';
 import { onError } from '@/utils/onError';
 // import { useMeStore } from '@/stores/useMeStore';
@@ -10,13 +10,11 @@ import TimerButton from '../Components/TimerButton';
 import styles from './index.module.scss';
 
 
-
-
 const SignInPage: FC = () => {
   // const meStore = useMeStore();
-  const [route] = useSearchParams()
-  const nav = useNavigate()
-  const refValidationCode = useRef<{ startCount: () => void }>(null)
+  const [route] = useSearchParams();
+  const nav = useNavigate();
+  const refValidationCode = useRef<{ startCount: () => void }>(null);
   const [formData, setFormData] = useState({ email: '770899447@qq.com', code: '' });
   const rules: Rules[] = [
     { key: 'email', type: 'required', message: '必填' },
@@ -37,7 +35,7 @@ const SignInPage: FC = () => {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     const res = await signIn(formData).catch(onError);
     localStorage.setItem('jwt', res.data.jwt);
-    const returnTo = route.get('return_to')
+    const returnTo = route.get('return_to');
     // meStore.refreshMe();
     nav(returnTo || '/start', { replace: true });
   };
@@ -69,5 +67,5 @@ const SignInPage: FC = () => {
       </div>
     </MainLayout>
   );
-}
+};
 export default SignInPage;
