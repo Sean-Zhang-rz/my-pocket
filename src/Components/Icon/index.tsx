@@ -16,6 +16,7 @@ export type IconName =
   | 'notify'
   | 'back'
   | 'date'
+  | 'loading'
   | 'none';
 interface IconProps {
   name: IconName;
