@@ -4,13 +4,15 @@ import Icon, { IconName } from '@/Components/Icon';
 import OverlayIcon from '../OverlayIcon';
 
 import styles from './index.module.scss';
+import useMenuStore from '@/stores/useMenuStore';
 
 interface NavBarProps {
   title: string;
   icon: IconName;
 }
 export const NavBar: FC<NavBarProps> = ({ icon, title }) => {
-  const [overlayVisible, setOverlayVisible] = useState<boolean>(false);
+  // const [overlayVisible, setOverlayVisible] = useState<boolean>(false);
+  const { visible, setVisible } = useMenuStore()
   const nav = useNavigate();
   const [params] = useSearchParams();
   const goBack: MouseEventHandler<SVGSVGElement> | undefined = () => {
@@ -22,7 +24,7 @@ export const NavBar: FC<NavBarProps> = ({ icon, title }) => {
     }
   };
   const openMenu: MouseEventHandler<SVGSVGElement> | undefined = () => {
-    setOverlayVisible((pre) => !pre);
+    setVisible(!visible);
   };
   return (
     <div className={styles.navbar}>
@@ -32,10 +34,10 @@ export const NavBar: FC<NavBarProps> = ({ icon, title }) => {
         </span>
       ) : null}
       <span className={styles.title_wrapper}>{title}</span>
-      {icon === 'menu' && overlayVisible === true ? (
+      {icon === 'menu' && visible === true ? (
         <OverlayIcon
           onClose={() => {
-            setOverlayVisible(false);
+            setVisible(false);
           }}
         />
       ) : null}
