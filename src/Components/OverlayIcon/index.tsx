@@ -1,12 +1,28 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Icon from '@/Components/Icon';
 import styles from './index.module.scss';
+import { animated, useSpring } from '@react-spring/web';
 interface OverlayIconProps {
+  isVisible?: boolean
   onClose: () => void;
 }
 export const OverlayIcon: FC<OverlayIconProps> = (props) => {
   const nav = useNavigate();
+  const [maskVisible, setMaskVisible] = useState(false)
+  const maskStyles = useSpring({
+    opacity: props.isVisible ? 1 : 0,
+    config: { duration: 300 },
+    onStart: ({ value: { opacity } }) => {
+      setMaskVisible(true)
+    }
+  })
+  const menuStyles = useSpring({
+    opacity: props.isVisible ? 1 : 0,
+    transform: props.isVisible ? 'translateX(0)' : 'translateX(-100%)',
+    config: { duration: 300 }
+  })
+
   const route = useParams();
   useEffect(() => { }, []);
   const onSignOut = async () => {
@@ -22,8 +38,12 @@ export const OverlayIcon: FC<OverlayIconProps> = (props) => {
   };
   return (
     <>
-      <div className={styles.mask} onClick={close}></div>
-      <div className={styles.overlay}>
+      <animated.div
+        className={styles.mask}
+        style={{ ...maskStyles, visibility: maskVisible ? 'visible' : 'hidden' }}
+        onClick={close}
+      />
+      <animated.div className={styles.overlay} style={menuStyles}>
         <section className={styles.currentUser}>
           {/* {myInfo ? (
             <div>
@@ -65,7 +85,7 @@ export const OverlayIcon: FC<OverlayIconProps> = (props) => {
             </li>
           </ul>
         </nav>
-      </div>
+      </animated.div>
     </>
   );
 };

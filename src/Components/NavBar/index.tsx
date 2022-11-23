@@ -1,17 +1,16 @@
-import { FC, MouseEventHandler, useState } from 'react';
+import { FC, MouseEventHandler } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Icon, { IconName } from '@/Components/Icon';
-import OverlayIcon from '../OverlayIcon';
-
-import styles from './index.module.scss';
 import useMenuStore from '@/stores/useMenuStore';
+import OverlayIcon from '../OverlayIcon';
+import styles from './index.module.scss';
+
 
 interface NavBarProps {
   title: string;
   icon: IconName;
 }
 export const NavBar: FC<NavBarProps> = ({ icon, title }) => {
-  // const [overlayVisible, setOverlayVisible] = useState<boolean>(false);
   const { visible, setVisible } = useMenuStore()
   const nav = useNavigate();
   const [params] = useSearchParams();
@@ -34,8 +33,9 @@ export const NavBar: FC<NavBarProps> = ({ icon, title }) => {
         </span>
       ) : null}
       <span className={styles.title_wrapper}>{title}</span>
-      {icon === 'menu' && visible === true ? (
+      {icon === 'menu' ? (
         <OverlayIcon
+          isVisible={visible}
           onClose={() => {
             setVisible(false);
           }}
