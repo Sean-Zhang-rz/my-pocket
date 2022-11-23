@@ -14,12 +14,15 @@ export const OverlayIcon: FC<OverlayIconProps> = (props) => {
     opacity: props.isVisible ? 1 : 0,
     config: { duration: 300 },
     onStart: ({ value: { opacity } }) => {
-      setMaskVisible(true)
+      if (opacity < 0.1) setMaskVisible(true)
+    },
+    onRest: ({ value: { opacity } }) => {
+      if (opacity < 0.1) setMaskVisible(false)
     }
   })
   const menuStyles = useSpring({
     opacity: props.isVisible ? 1 : 0,
-    transform: props.isVisible ? 'translateX(0)' : 'translateX(-100%)',
+    transform: props.isVisible ? 'translateX(0%)' : 'translateX(-100%)',
     config: { duration: 300 }
   })
 
