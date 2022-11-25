@@ -4,13 +4,13 @@ import { NavBar } from '@/Components/index';
 import { Outlet } from 'react-router-dom';
 interface MainLayoutProps {
   title: string;
-  icon: IconName;
+  icon?: IconName;
   children: ReactElement;
 }
 const MainLayout: FC<MainLayoutProps> = (props) => {
   return (
     <div>
-      <NavBar title={props.title} icon={props.icon} />
+      <NavBar title={props.title} icon={props.icon || 'menu'} />
       {props.children}
       <Outlet />
     </div>

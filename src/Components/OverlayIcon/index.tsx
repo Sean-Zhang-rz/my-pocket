@@ -5,11 +5,7 @@ import useMenuStore from '@/stores/useMenuStore';
 import Icon from '@/Components/Icon';
 import styles from './index.module.scss';
 
-
-interface OverlayIconProps {
-  onClose: () => void;
-}
-export const OverlayIcon: FC<OverlayIconProps> = (props) => {
+export const OverlayIcon: FC = () => {
   const nav = useNavigate();
   const { visible, setVisible } = useMenuStore()
   const myInfo = false

@@ -4,8 +4,9 @@ import styles from './index.module.scss';
 
 interface TabProps {
   selected: string;
-  classPrefix: string;
+  classPrefix?: string;
   children?: ReactElement | ReactElement[];
+  className?: string;
   onSelected: (key: string) => void
 }
 const Tabs: FC<TabProps> = (props) => {
@@ -30,6 +31,7 @@ const Tabs: FC<TabProps> = (props) => {
                 item.props?.id === props.selected
                   ? [styles.selected, cp + '_selected'].join(' ') : '',
                 cp + '_tabs_nav_item',
+                props?.className
               ].join(' ')}
               key={item.props.id}
               onClick={() => { props.onSelected(item.props.id) }}
