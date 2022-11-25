@@ -6,8 +6,6 @@ interface TabProps {
   onClick?: Function;
   children?: ReactNode;
 }
-const Tab: FC<TabProps> = (props) => {
-  return <div onClick={props?.onClick?.()}>{props.children}</div>;
-};
+const Tab: FC<TabProps> = (props) => <div onClick={props?.onClick?.()}>{props.children}</div>;
 
 export default Tab;

@@ -7,6 +7,7 @@ import WelcomeRedirection from '@/pages/Welcome/Components/WelocomeRedirection';
 // import ItemList from '@/pages/Item';
 // import ItemCreate from '@/pages/Item/components/Create';
 import Welcome from '../pages/Welcome';
+import ItemList from '@/pages/Item';
 
 const router = createHashRouter([
   {
@@ -46,7 +47,7 @@ const router = createHashRouter([
         children: [
           {
             path: '',
-            // element: <ItemList />,
+            element: <ItemList />,
           },
           {
             path: 'create',

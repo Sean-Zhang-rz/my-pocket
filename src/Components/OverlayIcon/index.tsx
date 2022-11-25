@@ -9,6 +9,7 @@ interface OverlayIconProps {
 }
 export const OverlayIcon: FC<OverlayIconProps> = (props) => {
   const nav = useNavigate();
+  const myInfo = false
   const [maskVisible, setMaskVisible] = useState(false)
   const maskStyles = useSpring({
     opacity: props.isVisible ? 1 : 0,
@@ -48,17 +49,17 @@ export const OverlayIcon: FC<OverlayIconProps> = (props) => {
       />
       <animated.div className={styles.overlay} style={menuStyles}>
         <section className={styles.currentUser}>
-          {/* {myInfo ? (
+          {myInfo ? (
             <div>
-              <h2 className={styles.email}>{myInfo.email}</h2>
+              {/* <h2 className={styles.email}>{myInfo.email}</h2> */}
               <p onClick={onSignOut}>退出登录</p>
             </div>
           ) : (
-            // <Link to={`/sign_in?return_to=${route.fullPath}`}>
-            //   <h2>未登录用户</h2>
-            //   <p>点击这里登录</p>
-            // </Link>
-          )} */}
+            <Link to={`/sign_in?return_to=${route.fullPath}`}>
+              <h2>未登录用户</h2>
+              <p>点击这里登录</p>
+            </Link>
+          )}
         </section>
         <nav>
           <ul className={styles.action_list}>

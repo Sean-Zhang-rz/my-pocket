@@ -2,8 +2,7 @@
 import { FC, useState } from 'react';
 import { Time } from '@/utils/time';
 import MainLayout from '@/Components/MainLayout';
-import { Tabs } from '@/Components/index';
-import { Tab } from '@/Components/index';
+import { Tabs, Tab } from '@/Components/index';
 // import { Form } from '@/components/Form';
 // import { FormItem } from '@/components/Form/Components/FormItem';
 import styles from './index.module.scss';
@@ -24,8 +23,10 @@ interface TimeTabsLayoutProps {
   showYear?: boolean;
   icon?: 'back' | 'menu';
 }
+export type TimeRange = 'thisMonth' | 'lastMonth' | 'thisYear' | 'custom'
+
 const TimeTabsLayout: FC<TimeTabsLayoutProps> = (props) => {
-  const [selected, setSelected] = useState('本月');
+  const [selected, setSelected] = useState('thisMonth');
   const [refOverlayVisible, setRefOverlayVisible] = useState(false);
   const time = new Time();
   const [customTime, setCustomTime] = useState<{
@@ -50,7 +51,9 @@ const TimeTabsLayout: FC<TimeTabsLayoutProps> = (props) => {
       end: time.lastDayOfYear(),
     },
   ];
-
+  const setTimeRange = (key: string) => {
+    setSelected(key)
+  }
   const onSubmitCustomTime = (e: Event) => {
     e.preventDefault();
     if (+new Date(tempTime.end) - +new Date(tempTime.start) < 0) {
@@ -65,18 +68,19 @@ const TimeTabsLayout: FC<TimeTabsLayoutProps> = (props) => {
     <MainLayout title="山竹记账" icon={props.icon || 'menu'}>
       <Tabs
         classPrefix={'customTabs'}
-        selected={!!selected}
-        // onUpdate:selected={(value) => {
-        //   if (value === '自定义时间') setRefOverlayVisible(true);
-        // }}
+        selected={selected}
+        onSelected={setTimeRange}
+      // onUpdate:selected={(value) => {
+      //   if (value === '自定义时间') setRefOverlayVisible(true);
+      // }}
       >
-        <Tab id="本月" name="本月">
+        <Tab id="thisMonth" name="本月">
           <props.component
             startDate={timeList[0].start.format()}
             endDate={timeList[0].end.format()}
           />
         </Tab>
-        <Tab id="上月" name="上月">
+        <Tab id="lastMonth" name="上月">
           <props.component
             startDate={timeList[1].start.format()}
             endDate={timeList[1].end.format()}
@@ -84,14 +88,14 @@ const TimeTabsLayout: FC<TimeTabsLayoutProps> = (props) => {
         </Tab>
 
         {props.showYear ? (
-          <Tab id="今年" name="今年">
+          <Tab id="thisYear" name="今年">
             <props.component
               startDate={timeList[2].start.format()}
               endDate={timeList[2].end.format()}
             />
           </Tab>
-        ) : null}
-        <Tab id="自定义时间" name="自定义时间">
+        ) : <></>}
+        <Tab id="custom" name="自定义时间">
           <props.component startDate={customTime.start!} endDate={customTime.end!} custom={true} />
         </Tab>
       </Tabs>

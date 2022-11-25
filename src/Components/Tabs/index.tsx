@@ -1,27 +1,23 @@
-import { FC, ReactNode, useEffect } from 'react';
+import { Children, FC, ReactElement } from 'react';
 import Tab from '@/Components/Tabs/Tab';
 import styles from './index.module.scss';
 
 interface TabProps {
-  selected: boolean;
+  selected: string;
   classPrefix: string;
-  children?: ReactNode;
+  children?: ReactElement | ReactElement[];
+  onSelected: (key: string) => void
 }
 const Tabs: FC<TabProps> = (props) => {
-  // emits: ['update:selected'],
-  const childrenArray = props.children;
-  console.log(childrenArray);
-
+  const childrenArray = Children.toArray(props.children) as ReactElement[];
   const cp = props.classPrefix;
-  useEffect(() => {
-    if (!childrenArray) return <></>;
-    childrenArray.forEach((v) => {
-      if (typeof v.type === 'symbol') return;
-      if (v.type !== Tab) {
-        throw new Error('<Tabs> only accepts <Tab> as children');
-      }
-    });
-  }, []);
+  if (!childrenArray) return <></>;
+  childrenArray.forEach((v) => {
+    if (typeof v.type === 'symbol') return;
+    if (v.type !== Tab) {
+      throw new Error('<Tabs> only accepts <Tab> as children');
+    }
+  });
 
   return (
     <div className={[styles.tabs, cp + '_tabs'].join(' ')}>
@@ -31,19 +27,19 @@ const Tabs: FC<TabProps> = (props) => {
           .map((item) => (
             <li
               className={[
-                item.props?.id === props.selected ? [styles.selected, cp + '_selected'] : '',
+                item.props?.id === props.selected
+                  ? [styles.selected, cp + '_selected'].join(' ') : '',
                 cp + '_tabs_nav_item',
               ].join(' ')}
-              onClick={() => {
-                // context.emit('update:selected', item.props?.id);
-              }}
+              key={item.props.id}
+              onClick={() => { props.onSelected(item.props.id) }}
             >
               {item.props?.name || item.props?.id}
             </li>
           ))}
       </ol>
       <div className={styles.tab_content}>
-        {/* {childrenArray.find((content) => content.props?.id === props.selected)} */}
+        {childrenArray.find((content) => content.props?.id === props.selected)}
       </div>
     </div>
   );
