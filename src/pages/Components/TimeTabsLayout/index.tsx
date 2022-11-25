@@ -21,8 +21,8 @@ TimeTabsRender.defaultProps = {
 };
 interface TimeTabsLayoutProps {
   component: typeof TimeTabsRender;
-  showYear: true;
-  icon: 'back' | 'menu';
+  showYear?: boolean;
+  icon?: 'back' | 'menu';
 }
 const TimeTabsLayout: FC<TimeTabsLayoutProps> = (props) => {
   const [selected, setSelected] = useState('本月');
@@ -62,10 +62,10 @@ const TimeTabsLayout: FC<TimeTabsLayoutProps> = (props) => {
   };
 
   return (
-    <MainLayout title="山竹记账" icon={props.icon}>
+    <MainLayout title="山竹记账" icon={props.icon || 'menu'}>
       <Tabs
         classPrefix={'customTabs'}
-        v-model:selected={selected}
+        selected={!!selected}
         // onUpdate:selected={(value) => {
         //   if (value === '自定义时间') setRefOverlayVisible(true);
         // }}
@@ -120,4 +120,9 @@ const TimeTabsLayout: FC<TimeTabsLayoutProps> = (props) => {
     </MainLayout>
   );
 };
+TimeTabsLayout.defaultProps = {
+  showYear: true,
+  icon: 'menu',
+};
+
 export default TimeTabsLayout;

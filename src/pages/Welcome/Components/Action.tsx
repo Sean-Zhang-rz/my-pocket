@@ -5,11 +5,11 @@ import styles from './index.module.scss';
 
 const WelcomeAction: FC = () => {
   const route = useParams();
-  const { setSkipFeature } = useLocalStore()
+  const { setSkipFeature } = useLocalStore();
   const id = parseInt(route?.id?.toString() || '');
   const onClick = () => {
     // localStorage.setItem('skipFeature', 'yes');
-    setSkipFeature(true)
+    setSkipFeature(true);
   };
   return (
     <div className={styles.actions}>

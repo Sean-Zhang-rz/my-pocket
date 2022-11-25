@@ -15,7 +15,8 @@ interface ItemSummaryProps {
 }
 
 export const ItemSummary: FC<ItemSummaryProps> = (props) => {
-  const itemStore = useItemStore(`items-${props.startDate}-${props.endDate}`);
+  // const itemStore = useItemStore(`items-${props.startDate}-${props.endDate}`);
+  const { itemList, hasMore, fetchItems, fetchNextPage, reset } = useItemStore();
   const [itemBalance, setItemBalance] = useState({
     expenses: 0,
     income: 0,
@@ -29,7 +30,7 @@ export const ItemSummary: FC<ItemSummaryProps> = (props) => {
     setItemBalance(() => res.data);
   };
   useEffect(() => {
-    itemStore.fetchItems(props.startDate, props.endDate);
+    fetchItems(props.startDate, props.endDate);
     fetchBalance();
   }, []);
   useEffect(() => {
@@ -38,8 +39,8 @@ export const ItemSummary: FC<ItemSummaryProps> = (props) => {
       income: 0,
       balance: 0,
     }));
-    // itemStore.$reset();
-    // itemStore.fetchItems(props.startDate, props.endDate);
+    reset();
+    fetchItems(props.startDate, props.endDate);
     fetchBalance();
   }, [props.startDate, props.endDate]);
 
@@ -60,10 +61,10 @@ export const ItemSummary: FC<ItemSummaryProps> = (props) => {
             <span>{itemBalance.balance}</span>
           </li>
         </ul>
-        {itemStore.itemList.length ? (
+        {itemList.length ? (
           <>
             <ol className={styles.list}>
-              {itemStore.itemList.map((item) => (
+              {itemList.map((item) => (
                 <li>
                   <div className={styles.sign}>
                     <span>{item.tags?.sign}</span>
@@ -83,8 +84,8 @@ export const ItemSummary: FC<ItemSummaryProps> = (props) => {
               ))}
             </ol>
             <div className={styles.more}>
-              {itemStore.hasMore ? (
-                <Button onClick={() => itemStore.fetchNextPage(props.startDate, props.endDate)}>
+              {hasMore ? (
+                <Button onClick={() => fetchNextPage(props.startDate, props.endDate)}>
                   向下滑动加载更多
                 </Button>
               ) : (

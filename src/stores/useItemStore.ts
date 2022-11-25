@@ -10,6 +10,7 @@ interface Item {
   page: number;
   fetchItems: (startDate?: string, endDate?: string) => void;
   fetchNextPage: (startDate?: string, endDate?: string) => void;
+  reset: () => void;
 }
 
 const useItemStore = create<Item>((set, get) => ({
@@ -51,6 +52,13 @@ const useItemStore = create<Item>((set, get) => ({
       itemList: [...get().itemList, ...items],
       hasMore: (pager.page - 1) * pager.per_page + items.length < pager.count,
       page: get().page + 1,
+    });
+  },
+  reset() {
+    set({
+      itemList: [],
+      hasMore: false,
+      page: 0,
     });
   },
 }));
