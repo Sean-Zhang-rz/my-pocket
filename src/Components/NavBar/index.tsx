@@ -35,7 +35,6 @@ export const NavBar: FC<NavBarProps> = ({ icon, title }) => {
       <span className={styles.title_wrapper}>{title}</span>
       {icon === 'menu' ? (
         <OverlayIcon
-          isVisible={visible}
           onClose={() => {
             setVisible(false);
           }}

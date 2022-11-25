@@ -1,18 +1,21 @@
 import { FC, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { animated, useSpring } from '@react-spring/web';
+import useMenuStore from '@/stores/useMenuStore';
 import Icon from '@/Components/Icon';
 import styles from './index.module.scss';
-import { animated, useSpring } from '@react-spring/web';
+
+
 interface OverlayIconProps {
-  isVisible?: boolean
   onClose: () => void;
 }
 export const OverlayIcon: FC<OverlayIconProps> = (props) => {
   const nav = useNavigate();
+  const { visible, setVisible } = useMenuStore()
   const myInfo = false
   const [maskVisible, setMaskVisible] = useState(false)
   const maskStyles = useSpring({
-    opacity: props.isVisible ? 1 : 0,
+    opacity: visible ? 1 : 0,
     config: { duration: 300 },
     onStart: ({ value: { opacity } }) => {
       if (opacity < 0.1) setMaskVisible(true)
@@ -22,13 +25,13 @@ export const OverlayIcon: FC<OverlayIconProps> = (props) => {
     }
   })
   const menuStyles = useSpring({
-    opacity: props.isVisible ? 1 : 0,
-    transform: props.isVisible ? 'translateX(0%)' : 'translateX(-100%)',
+    opacity: visible ? 1 : 0,
+    transform: visible ? 'translateX(0%)' : 'translateX(-100%)',
     config: { duration: 300 }
   })
 
   const route = useParams();
-  useEffect(() => { }, []);
+
   const onSignOut = async () => {
     // await Dialog.confirm({
     //   title: '确认',
@@ -37,9 +40,13 @@ export const OverlayIcon: FC<OverlayIconProps> = (props) => {
     localStorage.removeItem('jwt');
     nav('/sign_in');
   };
+
   const close = () => {
-    props.onClose?.();
+    setVisible(false)
   };
+  useEffect(() => () => {
+    close()
+  }, []);
   return (
     <>
       <animated.div
