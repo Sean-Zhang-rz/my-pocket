@@ -5,7 +5,7 @@ import { getBalance } from '@/api/item';
 import { onError } from '@/utils/onError';
 import DateTime from '@/pages/Components/Datetime';
 import { Time } from '@/utils/time';
-import { useItemStore } from '@/stores/useItemStore';
+import useItemStore from '@/stores/useItemStore';
 import styles from './index.module.scss';
 
 interface ItemSummaryProps {
