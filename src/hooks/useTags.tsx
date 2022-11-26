@@ -15,9 +15,9 @@ const useTags = (fetch: (page: number) => Promise<Result<TagResult>>) => {
     hasMore.current = (pager.page - 1) * pager.per_page + tagList.length < pager.count;
     page.current += 1;
   };
-  useEffect(() => {
-    getTagList();
-  }, []);
+  // useEffect(() => {
+  getTagList();
+  // }, []);
   return {
     page,
     hasMore,

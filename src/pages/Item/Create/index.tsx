@@ -28,6 +28,19 @@ const ItemCreate: FC = () => {
       tag_id,
     }));
   };
+  const onSelectHappenAt = (happen_at: string) => {
+    setFormData((pre) => ({
+      ...pre,
+      happen_at,
+    }));
+  };
+  const onInputAmount = (amount: number) => {
+    setFormData((pre) => ({
+      ...pre,
+      amount,
+    }));
+  };
+
   const onSubmit = async () => {
     if (!formData.tag_id || !formData.amount) return;
     await createItems({
@@ -48,7 +61,13 @@ const ItemCreate: FC = () => {
           </Tab>
         </Tabs>
         <div className={styles.inputPad_wrapper}>
-          <InputPad happenAt={formData.happen_at} amount={formData.amount} onSubmit={onSubmit} />
+          <InputPad
+            happenAt={formData.happen_at}
+            amount={formData.amount}
+            onSelectHappenAt={onSelectHappenAt}
+            onInputAmount={onInputAmount}
+            onSubmit={onSubmit}
+          />
         </div>
       </div>
     </MainLayout>
