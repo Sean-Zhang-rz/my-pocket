@@ -1,5 +1,5 @@
 import { Children, FC, ReactElement } from 'react';
-import Tab from '@/Components/Tabs/Tab';
+import Tab from './Tab';
 import styles from './index.module.scss';
 
 interface TabProps {
@@ -7,7 +7,7 @@ interface TabProps {
   classPrefix?: string;
   children?: ReactElement | ReactElement[];
   className?: string;
-  onSelected: (key: string) => void
+  onSelected: (key: string) => void;
 }
 const Tabs: FC<TabProps> = (props) => {
   const childrenArray = Children.toArray(props.children) as ReactElement[];
@@ -21,7 +21,7 @@ const Tabs: FC<TabProps> = (props) => {
   });
 
   return (
-    <div className={[styles.tabs, cp + '_tabs'].join(' ')}>
+    <div className={[styles.tabs, cp + '_tabs', props.className].join(' ')}>
       <ol className={styles.tabs_nav}>
         {childrenArray
           .filter((v) => v.type === Tab)
@@ -29,12 +29,15 @@ const Tabs: FC<TabProps> = (props) => {
             <li
               className={[
                 item.props?.id === props.selected
-                  ? [styles.selected, cp + '_selected'].join(' ') : '',
+                  ? [styles.selected, cp + '_selected'].join(' ')
+                  : '',
                 cp + '_tabs_nav_item',
-                props?.className
+                props?.className,
               ].join(' ')}
               key={item.props.id}
-              onClick={() => { props.onSelected(item.props.id) }}
+              onClick={() => {
+                props.onSelected(item.props.id);
+              }}
             >
               {item.props?.name || item.props?.id}
             </li>

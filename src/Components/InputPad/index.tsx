@@ -1,5 +1,4 @@
 // import { DatetimePicker, Popup } from 'vant';
-// import { computed, defineComponent, PropType, ref, watch, watchEffect } from 'vue';
 import { Time } from '@/utils/time';
 import { FC, useRef } from 'react';
 import { Icon } from '../Icon';
@@ -11,13 +10,12 @@ interface ButtonProps {
   onClick: () => void;
 }
 interface InputPadProps {
-  happenAt: string,
-  amount: number,
-  disabled?: boolean
-  onSubmit: () => void
+  happenAt: string;
+  amount: number;
+  disabled?: boolean;
+  onSubmit: () => void;
 }
 const InputPad: FC<InputPadProps> = (props) => {
-
   const amount = useRef<String>(props.amount ? `${props.amount}` : '');
   const isShow = useRef(false);
   const disabled = useRef<boolean>(false);
@@ -33,7 +31,6 @@ const InputPad: FC<InputPadProps> = (props) => {
     amount.current += `${n}`;
   };
   const setDate = (date: Date) => {
-
     // context.emit('update:happenAt', date.toISOString());
     hideDatePicker();
   };
@@ -155,6 +152,6 @@ const InputPad: FC<InputPadProps> = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export default InputPad;
