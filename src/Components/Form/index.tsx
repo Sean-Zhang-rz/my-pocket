@@ -9,12 +9,13 @@ interface FormProps {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   children?: ReactElement[];
 }
-function useForm<T>(initialForm: T) {
-  const [data, setData] = useState<T>(initialForm);
-  return { data, setData }
+
+export function useForm<T>(initialForm: T) {
+  const [value, setValue] = useState<T>(initialForm);
+  return { value, setValue };
 }
 const Form: FC<FormProps> = (props) => {
-  const form = useForm(props.formData)
+  // const form = useForm(props.formData);
   const [errors, setErrors] = useState<{ [k in keyof typeof props.formData]?: string[] }>({});
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {

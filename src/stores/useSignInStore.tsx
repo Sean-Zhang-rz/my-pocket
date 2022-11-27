@@ -20,3 +20,4 @@ const useSignInStore = create<SignIn>((set, get) => ({
     }));
   },
 }));
+export default useSignInStore;

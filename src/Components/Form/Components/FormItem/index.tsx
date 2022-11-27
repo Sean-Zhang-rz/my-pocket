@@ -22,21 +22,22 @@ interface FormItemProps {
 }
 
 const SelectItem: FC<FormItemProps> = (props) => {
-  return <select
-    className={[styles.form_item, styles.select].join(' ')}
-    value={props.value}
-    onChange={(e: any) => {
-      // context.emit('update:modelValue', e.target.value);
-    }}
-  >
-    {props.options?.map((option) => (
-      <option value={option.value}>{option.text}</option>
-    ))}
-  </select>
-}
+  return (
+    <select
+      className={[styles.form_item, styles.select].join(' ')}
+      value={props.value}
+      onChange={(e: any) => {
+        // context.emit('update:modelValue', e.target.value);
+      }}
+    >
+      {props.options?.map((option) => (
+        <option value={option.value}>{option.text}</option>
+      ))}
+    </select>
+  );
+};
 
 const FormItem: FC<FormItemProps> = (props) => {
-
   const [refDateVisible, setRefDateVisible] = useState(false);
   const content = useMemo(() => {
     return (
@@ -50,9 +51,10 @@ const FormItem: FC<FormItemProps> = (props) => {
             {' '}
             <input
               value={props.value}
-              readOnly={props.type === 'date'}
+              // readOnly={props.type === 'date'}
               placeholder={props.placeholder}
-              onInput={(e: any) => {
+              onChange={(e: any) => {
+                console.log(e.target.value);
               }}
               className={[
                 styles.form_item,
