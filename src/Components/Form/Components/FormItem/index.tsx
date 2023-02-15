@@ -37,7 +37,7 @@ const SelectItem: FC<FormItemProps> = (props) => {
 
 const FormItem: FC<FormItemProps> = (props) => {
 
-  const [refDateVisible, setRefDateVisible] = useState(false);
+  // const [refDateVisible, setRefDateVisible] = useState(false);
   const content = useMemo(() => {
     return (
       <div className={styles.form_item_value}>
@@ -53,6 +53,7 @@ const FormItem: FC<FormItemProps> = (props) => {
               readOnly={props.type === 'date'}
               placeholder={props.placeholder}
               onInput={(e: any) => {
+                props.value = e.target.value
               }}
               className={[
                 styles.form_item,
@@ -61,7 +62,7 @@ const FormItem: FC<FormItemProps> = (props) => {
                 props.error?.length! > 1 ? styles.error : '',
               ].join(' ')}
             />
-            {props.button ? <div className={styles.slots_button}>{props.button}</div> : null}
+            {/* {props.button ? <div className={styles.slots_button}>{props.button}</div> : null} */}
           </>
         )}
       </div>

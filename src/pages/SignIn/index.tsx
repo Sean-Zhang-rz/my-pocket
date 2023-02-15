@@ -8,6 +8,7 @@ import { onError } from '@/utils/onError';
 // import { Toast } from 'vant';
 import TimerButton from '../Components/TimerButton';
 import styles from './index.module.scss';
+import useSignInStore from '@/stores/useSignInStore';
 
 
 const SignInPage: FC = () => {
@@ -15,7 +16,8 @@ const SignInPage: FC = () => {
   const [route] = useSearchParams();
   const nav = useNavigate();
   const refValidationCode = useRef<{ startCount: () => void }>(null);
-  const [formData, setFormData] = useState({ email: '770899447@qq.com', code: '' });
+  // const [formData, setFormData] = useState({ email: '770899447@qq.com', code: '' });
+  const { formData, setFormData } = useSignInStore()
   const rules: Rules[] = [
     { key: 'email', type: 'required', message: '必填' },
     { key: 'email', type: 'pattern', regex: /.+@.+/, message: '邮箱地址不正确' },

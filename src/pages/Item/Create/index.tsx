@@ -39,11 +39,11 @@ const ItemCreate: FC = () => {
           </Tab>
         </Tabs>
         <div className={styles.inputPad_wrapper}>
-          <InputPad
+          {/* <InputPad
             v-model:happenAt={formData.happen_at}
             v-model:amount={formData.amount}
             onSubmit={onSubmit}
-          />
+          /> */}
         </div>
       </div>
     </MainLayout>
