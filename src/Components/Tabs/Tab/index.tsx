@@ -7,12 +7,10 @@ interface TabProps {
   className?: string;
   children?: ReactNode;
 }
-const Tab: FC<TabProps> = (props) =>
-  <div
-    className={props.className}
-    onClick={props?.onClick?.()}
-  >
+const Tab: FC<TabProps> = (props) => (
+  <div className={props.className} onClick={props?.onClick?.()}>
     {props.children}
-  </div>;
+  </div>
+);
 
 export default Tab;

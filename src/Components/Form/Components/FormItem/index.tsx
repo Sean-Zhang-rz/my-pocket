@@ -23,18 +23,20 @@ interface FormItemProps {
 }
 
 const SelectItem: FC<FormItemProps> = (props) => {
-  return <select
-    className={[styles.form_item, styles.select].join(' ')}
-    value={props.value}
-    onChange={(e: any) => {
-      // context.emit('update:modelValue', e.target.value);
-    }}
-  >
-    {props.options?.map((option) => (
-      <option value={option.value}>{option.text}</option>
-    ))}
-  </select>
-}
+  return (
+    <select
+      className={[styles.form_item, styles.select].join(' ')}
+      value={props.value}
+      onChange={(e: any) => {
+        // context.emit('update:modelValue', e.target.value);
+      }}
+    >
+      {props.options?.map((option) => (
+        <option value={option.value}>{option.text}</option>
+      ))}
+    </select>
+  );
+};
 
 const FormItem: FC<FormItemProps> = (props) => {
 

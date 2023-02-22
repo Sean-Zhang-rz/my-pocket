@@ -8,6 +8,7 @@ import WelcomeRedirection from '@/pages/Welcome/Components/WelocomeRedirection';
 // import ItemCreate from '@/pages/Item/components/Create';
 import Welcome from '../pages/Welcome';
 import ItemList from '@/pages/Item';
+import ItemCreate from '@/pages/Item/Create';
 
 const router = createHashRouter([
   {
@@ -39,7 +40,7 @@ const router = createHashRouter([
       },
       {
         path: '/sign-in',
-        element: <SignInPage />
+        element: <SignInPage />,
       },
       {
         path: '/items',
@@ -51,9 +52,8 @@ const router = createHashRouter([
           },
           {
             path: 'create',
-            // element: <ItemCreate />,
+            element: <ItemCreate />,
           },
-
         ],
       },
     ],

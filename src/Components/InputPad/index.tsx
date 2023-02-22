@@ -1,5 +1,4 @@
 // import { DatetimePicker, Popup } from 'vant';
-// import { computed, defineComponent, PropType, ref, watch, watchEffect } from 'vue';
 import { Time } from '@/utils/time';
 import { FC, useRef } from 'react';
 import { Icon } from '../Icon';
@@ -11,13 +10,14 @@ interface ButtonProps {
   onClick: () => void;
 }
 interface InputPadProps {
-  happenAt: string,
-  amount: number,
-  disabled?: boolean
-  onSubmit: () => void
+  happenAt: string;
+  amount: number;
+  disabled?: boolean;
+  onSelectHappenAt: (happen_at: string) => void;
+  onInputAmount: (amount: number) => void;
+  onSubmit: () => void;
 }
 const InputPad: FC<InputPadProps> = (props) => {
-
   const amount = useRef<String>(props.amount ? `${props.amount}` : '');
   const isShow = useRef(false);
   const disabled = useRef<boolean>(false);
@@ -33,8 +33,7 @@ const InputPad: FC<InputPadProps> = (props) => {
     amount.current += `${n}`;
   };
   const setDate = (date: Date) => {
-
-    // context.emit('update:happenAt', date.toISOString());
+    props.onSelectHappenAt(date.toISOString());
     hideDatePicker();
   };
   const showDatePicker = () => {
@@ -113,13 +112,13 @@ const InputPad: FC<InputPadProps> = (props) => {
     {
       text: '清空',
       onClick: () => {
-        amount.value = '0';
+        amount.current = '0';
       },
     },
     {
       text: '提交',
       onClick: () => {
-        context.emit('update:amount', +amount.value);
+        props.onInputAmount(+amount.current);
         props.onSubmit?.();
       },
     },
@@ -147,7 +146,11 @@ const InputPad: FC<InputPadProps> = (props) => {
       <div className={styles.number_keyboard__body}>
         <div className={styles.number_keyboard__body_keys}>
           {keyMaps.map((key) => (
-            <button onClick={key.onClick} className={disabled.current ? styles.disabled : ''}>
+            <button
+              key={key.text}
+              onClick={key.onClick}
+              className={disabled.current ? styles.disabled : ''}
+            >
               {key.text}
             </button>
           ))}
@@ -155,6 +158,6 @@ const InputPad: FC<InputPadProps> = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export default InputPad;

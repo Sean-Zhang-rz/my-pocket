@@ -11,7 +11,6 @@ import styles from './index.module.scss';
 import useSignInStore from '@/stores/useSignInStore';
 import { Input } from '@/Components/Input';
 
-
 const SignInPage: FC = () => {
   // const meStore = useMeStore();
   const [route] = useSearchParams();

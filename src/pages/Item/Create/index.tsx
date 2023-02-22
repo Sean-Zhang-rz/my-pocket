@@ -1,24 +1,46 @@
-import { FC, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { createItems } from "@/api/item";
-import { ItemCreateDTO } from "@/api/types/items";
-import { MainLayout, Tab, Tabs } from "@/Components";
-import { onError } from "@/utils/onError";
-import Tags from "./Tags";
+import { FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { createItems } from '@/api/item';
+import { ItemCreateDTO } from '@/api/types/items';
+import { MainLayout, Tab, Tabs, InputPad } from '@/Components';
+import { onError } from '@/utils/onError';
+import Tags from './Tags';
 
-import styles from './index.module.scss'
+import styles from './index.module.scss';
 
 const ItemCreate: FC = () => {
-  const [formData] = useState<ItemCreateDTO>({
+  const [formData, setFormData] = useState<ItemCreateDTO>({
     kind: 'expenses',
     tag_id: '',
     amount: 0,
     happen_at: new Date().toISOString(),
   });
   const nav = useNavigate();
-  const onSelected = () => {
+  const onSelected = (selected: string) => {
+    setFormData((pre) => ({
+      ...pre,
+      selected,
+    }));
+  };
+  const selectTags = (tag_id: string) => {
+    setFormData((pre) => ({
+      ...pre,
+      tag_id,
+    }));
+  };
+  const onSelectHappenAt = (happen_at: string) => {
+    setFormData((pre) => ({
+      ...pre,
+      happen_at,
+    }));
+  };
+  const onInputAmount = (amount: number) => {
+    setFormData((pre) => ({
+      ...pre,
+      amount,
+    }));
+  };
 
-  }
   const onSubmit = async () => {
     if (!formData.tag_id || !formData.amount) return;
     await createItems({
@@ -32,10 +54,10 @@ const ItemCreate: FC = () => {
       <div className={styles.wrapper}>
         <Tabs selected={formData.kind} className={styles.tabs} onSelected={onSelected}>
           <Tab id="expenses" name="支出" className={styles.tags_wrapper}>
-            <Tags v-model:selected={formData.tag_id} kind="expenses" key="expenses" />
+            <Tags selected={formData.tag_id} kind="expenses" key="expenses" onSelect={selectTags} />
           </Tab>
           <Tab id="income" name="收入" className={styles.tags_wrapper}>
-            <Tags v-model:selected={formData.tag_id} kind="income" key="income" />
+            <Tags selected={formData.tag_id} kind="income" key="income" onSelect={selectTags} />
           </Tab>
         </Tabs>
         <div className={styles.inputPad_wrapper}>
@@ -48,6 +70,6 @@ const ItemCreate: FC = () => {
       </div>
     </MainLayout>
   );
-}
+};
 
 export default ItemCreate;

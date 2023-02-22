@@ -1,13 +1,14 @@
-import Button from '@/Components/Button';
-import FloatButton from '@/Components/FloatButton';
-import Icon from '@/Components/Icon';
-import MainLayout from '@/Components/MainLayout';
-import Form from '@/Components/Form';
-import FormItem from '@/Components/Form/Components/FormItem';
-import Tabs from '@/Components/Tabs'
-import Tab from '@/Components/Tabs/Tab'
-import NavBar from '@/Components/NavBar'
-import OverlayIcon from '@/Components/OverlayIcon'
+import Button from './Button';
+import FloatButton from './FloatButton';
+import Icon from './Icon';
+import MainLayout from './MainLayout';
+import Form from './Form';
+import FormItem from './Form/Components/FormItem';
+import Tabs from './Tabs';
+import Tab from './Tabs/Tab';
+import NavBar from './NavBar';
+import OverlayIcon from './OverlayIcon';
+import InputPad from './InputPad';
 
 export {
   Button,
@@ -19,5 +20,6 @@ export {
   Tabs,
   Tab,
   NavBar,
-  OverlayIcon
-}
+  OverlayIcon,
+  InputPad,
+};
