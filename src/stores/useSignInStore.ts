@@ -7,7 +7,7 @@ interface FormData extends FormDataProps {
 }
 interface SignIn {
   formData: FormData,
-  setFormData: (formData: FormData) => void
+  setFormData: (formData: Partial<FormData>) => void
 }
 const useSignInStore = create<SignIn>((set) => ({
   formData: {

@@ -5,6 +5,7 @@ import Button from '@/Components/Button';
 import { Time } from '@/utils/time';
 
 import styles from './index.module.scss';
+import { Input } from '@/Components/Input';
 
 interface FormItemProps {
   prop?: string;
@@ -41,30 +42,16 @@ const FormItem: FC<FormItemProps> = (props) => {
   const content = useMemo(() => {
     return (
       <div className={styles.form_item_value}>
-        {props.children ? (
+        {
           Children.map(props.children, (c) =>
-            c ? cloneElement(c, { className: props.error?.length! > 1 ? styles.error : '' }) : null
-          )
-        ) : (
-          <>
-            {' '}
-            <input
-              value={props.value}
-              readOnly={props.type === 'date'}
-              placeholder={props.placeholder}
-              onInput={(e: any) => {
-                props.value = e.target.value
-              }}
-              className={[
+            c ? cloneElement(c, {
+              className: [
                 styles.form_item,
-                styles.input,
-                props.button ? styles.input_with_button : '',
-                props.error?.length! > 1 ? styles.error : '',
-              ].join(' ')}
-            />
-            {/* {props.button ? <div className={styles.slots_button}>{props.button}</div> : null} */}
-          </>
-        )}
+                props.error?.length! > 1 ? styles.error : ''
+              ].join(' ')
+            }) : null
+          )
+        }
       </div>
     );
   }, [props.children, props.type, props.value]);

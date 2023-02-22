@@ -9,6 +9,7 @@ import { onError } from '@/utils/onError';
 import TimerButton from '../Components/TimerButton';
 import styles from './index.module.scss';
 import useSignInStore from '@/stores/useSignInStore';
+import { Input } from '@/Components/Input';
 
 
 const SignInPage: FC = () => {
@@ -50,8 +51,13 @@ const SignInPage: FC = () => {
           <h1 className={styles.appName}>山竹记账</h1>
         </div>
         <Form formData={formData} rules={rules} onSubmit={onSubmit}>
-          <FormItem label="邮箱地址" prop="email" placeholder="请输入邮箱，然后点击发送验证码" />
-          <FormItem label="验证码"
+          <FormItem label="邮箱地址" prop="email" >
+            <Input value={formData.email}
+              placeholder={'请输入邮箱，然后点击发送验证码'}
+              onChange={(value) => { setFormData({ email: `${value}` }) }}
+            />
+          </FormItem>
+          {/* <FormItem label="验证码"
             prop="code"
             placeholder="请输入六位数字"
             button={<TimerButton
@@ -59,13 +65,14 @@ const SignInPage: FC = () => {
               disabled={!formData.email}
               onClick={onClickSendValidationCode}
             />}
-          />
+          /> */}
           <FormItem style={{ paddingTop: '96px' }}>
             <Button type="submit" className={styles.btn}>
               登录
             </Button>
           </FormItem>
         </Form>
+
       </div>
     </MainLayout>
   );
