@@ -4,7 +4,7 @@ import styles from './index.module.scss'
 interface InputProps {
   label?: string;
   placeholder?: string;
-  type?: 'text' | 'button';
+  type?: 'text' | 'with_btn';
   value?: string | number;
   error?: string;
   className?: string;
@@ -24,11 +24,11 @@ export const Input: FC<InputProps> = (props) => {
         onChange={e => onChange?.(e.target.value)}
         className={[
           styles.input,
-          type === 'button' ? styles.input_with_button : '',
+          type === 'with_btn' ? styles.input_with_button : '',
           className
         ].join(' ')}
       />
-      {type === 'button' ? children : null}
+      {type === 'with_btn' ? children : null}
     </div>
   )
 }

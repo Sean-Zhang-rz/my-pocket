@@ -31,7 +31,7 @@ const Form: FC<FormProps> = (props) => {
       });
       const err = validate(props.formData, props.rules);
       if (Object.keys(err).length) {
-        Object.assign(errors, err);
+        setErrors(err)
         return false;
       } else {
         return true;

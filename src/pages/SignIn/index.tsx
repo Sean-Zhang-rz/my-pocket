@@ -1,15 +1,16 @@
-import { FC, FormEvent, useState, useRef } from 'react';
+import { FC, FormEvent, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Rules } from '@/api/types/form';
 import { Icon, Button, Form, FormItem, MainLayout } from '@/Components/index';
+import { Input } from '@/Components/Input';
 import { getValidationCode, signIn } from '@/api/common';
 import { onError } from '@/utils/onError';
+import useSignInStore from '@/stores/useSignInStore';
 // import { useMeStore } from '@/stores/useMeStore';
 // import { Toast } from 'vant';
 import TimerButton from '../Components/TimerButton';
 import styles from './index.module.scss';
-import useSignInStore from '@/stores/useSignInStore';
-import { Input } from '@/Components/Input';
+
 
 const SignInPage: FC = () => {
   // const meStore = useMeStore();
@@ -35,6 +36,8 @@ const SignInPage: FC = () => {
     if (refValidationCode.current) refValidationCode.current.startCount();
   };
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    console.log('点击了登录');
+
     const res = await signIn(formData).catch(onError);
     localStorage.setItem('jwt', res.data.jwt);
     const returnTo = route.get('return_to');
@@ -58,7 +61,7 @@ const SignInPage: FC = () => {
           </FormItem>
           <FormItem label="验证码" prop="code">
             <Input value={formData.code}
-              type='button'
+              type='with_btn'
               placeholder={'请输入六位数字'}
               onChange={(value) => { setFormData({ code: `${value}` }) }}
             >
@@ -69,11 +72,12 @@ const SignInPage: FC = () => {
               />
             </Input>
           </FormItem>
-          <FormItem style={{ paddingTop: '96px' }}>
-            <Button type="submit" className={styles.btn}>
+          <FormItem>
+            <Button type="submit" className={styles.login_btn}>
               登录
             </Button>
           </FormItem>
+
         </Form>
 
       </div>

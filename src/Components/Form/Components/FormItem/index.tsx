@@ -48,6 +48,7 @@ const FormItem: FC<FormItemProps> = (props) => {
           Children.map(props.children, (c) =>
             c ? cloneElement(c, {
               className: [
+                c.props.className,
                 styles.form_item,
                 props.error?.length! > 1 ? styles.error : ''
               ].join(' ')
