@@ -56,15 +56,19 @@ const SignInPage: FC = () => {
               onChange={(value) => { setFormData({ email: `${value}` }) }}
             />
           </FormItem>
-          {/* <FormItem label="验证码"
-            prop="code"
-            placeholder="请输入六位数字"
-            button={<TimerButton
-              ref={refValidationCode}
-              disabled={!formData.email}
-              onClick={onClickSendValidationCode}
-            />}
-          /> */}
+          <FormItem label="验证码" prop="code">
+            <Input value={formData.code}
+              type='button'
+              placeholder={'请输入六位数字'}
+              onChange={(value) => { setFormData({ code: `${value}` }) }}
+            >
+              <TimerButton
+                ref={refValidationCode}
+                disabled={!formData.email}
+                onClick={onClickSendValidationCode}
+              />
+            </Input>
+          </FormItem>
           <FormItem style={{ paddingTop: '96px' }}>
             <Button type="submit" className={styles.btn}>
               登录
