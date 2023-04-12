@@ -22,7 +22,10 @@ export const ItemSummary: FC<ItemSummaryProps> = (props) => {
     income: 0,
     balance: 0,
   });
+
   const fetchBalance = async () => {
+    console.log('fetchBalance');
+
     const res = await getBalance({
       happen_after: props.startDate,
       happen_before: props.endDate,
@@ -34,14 +37,14 @@ export const ItemSummary: FC<ItemSummaryProps> = (props) => {
     fetchBalance();
   }, []);
   useEffect(() => {
-    setItemBalance(() => ({
-      expenses: 0,
-      income: 0,
-      balance: 0,
-    }));
-    reset();
-    fetchItems(props.startDate, props.endDate);
-    fetchBalance();
+    // setItemBalance(() => ({
+    //   expenses: 0,
+    //   income: 0,
+    //   balance: 0,
+    // }));
+    // reset();
+    // fetchItems(props.startDate, props.endDate);
+    // fetchBalance();
   }, [props.startDate, props.endDate]);
 
   return (

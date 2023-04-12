@@ -15,12 +15,16 @@ interface TagsProps {
 }
 
 export const Tags: FC<TagsProps> = (props) => {
+  console.log(props);
+
   const nav = useNavigate();
   const {
     tags: tagList,
     hasMore,
     getTagList,
   } = useTags((p) => getTags({ kind: props.kind, page: p + 1 }).catch(onError));
+  console.log(tagList.current);
+
   const addNewTag = () => {
     nav(`/tags/create?kind=${props.kind}`);
   };

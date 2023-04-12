@@ -12,7 +12,7 @@ interface InputProps {
   onChange?: (value: string | number) => void;
 }
 
-export const Input: FC<InputProps> = (props) => {
+const Input: FC<InputProps> = (props) => {
   const { placeholder, type, value, onChange, className, children } = props
 
   return (
@@ -32,3 +32,4 @@ export const Input: FC<InputProps> = (props) => {
     </div>
   )
 }
+export default Input;

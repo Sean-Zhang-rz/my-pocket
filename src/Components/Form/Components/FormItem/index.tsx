@@ -1,11 +1,9 @@
 import { cloneElement, CSSProperties, FC, useMemo, useState, Children, ReactElement } from 'react';
 import FormDataProps, { Rules } from '@/api/types/form';
 // import { DatetimePicker, Popup } from 'vant';
-import Button from '@/Components/Button';
 import { Time } from '@/utils/time';
 
 import styles from './index.module.scss';
-import { Input } from '@/Components/Input';
 
 interface FormItemProps {
   prop?: string;

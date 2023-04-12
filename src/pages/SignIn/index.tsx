@@ -1,8 +1,8 @@
 import { FC, FormEvent, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Rules } from '@/api/types/form';
-import { Icon, Button, Form, FormItem, MainLayout } from '@/Components/index';
-import { Input } from '@/Components/Input';
+import { Icon, Button, Form, FormItem, MainLayout, Input } from '@/Components/index';
+// import { Input } from '@/Components/Input';
 import { getValidationCode, signIn } from '@/api/common';
 import { onError } from '@/utils/onError';
 import useSignInStore from '@/stores/useSignInStore';
@@ -17,7 +17,6 @@ const SignInPage: FC = () => {
   const [route] = useSearchParams();
   const nav = useNavigate();
   const refValidationCode = useRef<{ startCount: () => void }>(null);
-  // const [formData, setFormData] = useState({ email: '770899447@qq.com', code: '' });
   const { formData, setFormData } = useSignInStore()
   const rules: Rules[] = [
     { key: 'email', type: 'required', message: '必填' },

@@ -17,8 +17,6 @@ const StartPage: FC = () => {
   return (
     <MainLayout title="山竹记账" icon="menu">
       <>
-
-
         <div className={styles.icon_wrapper}>
           <Icon name="pig" className={styles.icon} />
         </div>

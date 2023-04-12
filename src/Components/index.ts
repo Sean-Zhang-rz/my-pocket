@@ -9,6 +9,7 @@ import Tab from './Tabs/Tab';
 import NavBar from './NavBar';
 import OverlayIcon from './OverlayIcon';
 import InputPad from './InputPad';
+import Input from './Input';
 
 export {
   Button,
@@ -22,4 +23,5 @@ export {
   NavBar,
   OverlayIcon,
   InputPad,
+  Input,
 };
