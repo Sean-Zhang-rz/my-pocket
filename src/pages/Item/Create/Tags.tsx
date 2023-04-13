@@ -13,22 +13,22 @@ interface TagsProps {
 }
 
 export const Tags: FC<TagsProps> = (props) => {
-  console.log(props);
-
   const nav = useNavigate();
   const { tagList, hasMore, getTagList, getNextTagList } = useTagStore();
 
   useEffect(() => {
-    getTagList(props.kind)
-  }, [])
+    getTagList(props.kind);
+  }, []);
   const addNewTag = () => {
     nav(`/tags/create?kind=${props.kind}`);
   };
   const timer = useRef<NodeJS.Timeout>();
   const currentTag = useRef<HTMLDivElement>();
+
   const onLongPress = (id: string) => {
     nav(`/tags/${id}/edit?kind=${props.kind}`);
   };
+
   const onTouchStart = (e: TouchEvent<HTMLDivElement>, tag: TagDTO) => {
     currentTag.current = e.currentTarget as HTMLDivElement;
     timer.current = setTimeout(() => {

@@ -2,11 +2,12 @@ import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createItems } from '@/api/item';
 import { ItemCreateDTO } from '@/api/types/items';
-import { MainLayout, Tab, Tabs, InputPad } from '@/Components';
+import { MainLayout, Tab, Tabs } from '@/Components';
 import { onError } from '@/utils/onError';
 import Tags from './Tags';
 
 import styles from './index.module.scss';
+import { InputPad } from './components/InputPad';
 
 const ItemCreate: FC = () => {
   const [formData, setFormData] = useState<ItemCreateDTO>({
@@ -17,14 +18,13 @@ const ItemCreate: FC = () => {
   });
   const nav = useNavigate();
   const onSelected = (selected: string) => {
-    if (formData.kind === selected) return
+    if (formData.kind === selected) return;
     if (selected === 'expenses' || selected === 'income') {
       setFormData((pre) => ({
         ...pre,
         kind: selected,
       }));
     }
-
   };
   const selectTags = (tag_id: string) => {
     setFormData((pre) => ({
@@ -65,11 +65,11 @@ const ItemCreate: FC = () => {
           </Tab>
         </Tabs>
         <div className={styles.inputPad_wrapper}>
-          {/* <InputPad
-            v-model:happenAt={formData.happen_at}
-            v-model:amount={formData.amount}
-            onSubmit={onSubmit}
-          /> */}
+          <InputPad
+          // v-model:happenAt={formData.happen_at}
+          // v-model:amount={formData.amount}
+          // onSubmit={onSubmit}
+          />
         </div>
       </div>
     </MainLayout>
