@@ -16,13 +16,15 @@ const ItemCreate: FC = () => {
     happen_at: new Date().toISOString(),
   });
   const nav = useNavigate();
-  const onSelected = (selected: 'expenses' | 'income') => {
+  const onSelected = (selected: string) => {
     if (formData.kind === selected) return
-    console.log(formData, selected);
-    setFormData((pre) => ({
-      ...pre,
-      kind: selected,
-    }));
+    if (selected === 'expenses' || selected === 'income') {
+      setFormData((pre) => ({
+        ...pre,
+        kind: selected,
+      }));
+    }
+
   };
   const selectTags = (tag_id: string) => {
     setFormData((pre) => ({

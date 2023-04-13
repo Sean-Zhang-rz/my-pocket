@@ -1,7 +1,7 @@
 import { FC, ReactElement } from 'react';
-import { IconName } from '../Icon';
-import { NavBar } from '@/Components/index';
 import { Outlet } from 'react-router-dom';
+import { NavBar } from '@/Components/index';
+import { IconName } from '../Icon';
 interface MainLayoutProps {
   title: string;
   icon?: IconName;

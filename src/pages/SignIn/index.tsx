@@ -2,7 +2,6 @@ import { FC, FormEvent, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Rules } from '@/api/types/form';
 import { Icon, Button, Form, FormItem, MainLayout, Input } from '@/Components/index';
-// import { Input } from '@/Components/Input';
 import { getValidationCode, signIn } from '@/api/common';
 import { onError } from '@/utils/onError';
 import useSignInStore from '@/stores/useSignInStore';
@@ -76,9 +75,7 @@ const SignInPage: FC = () => {
               登录
             </Button>
           </FormItem>
-
         </Form>
-
       </div>
     </MainLayout>
   );
