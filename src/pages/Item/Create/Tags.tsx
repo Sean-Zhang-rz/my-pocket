@@ -1,12 +1,10 @@
-import { FC, TouchEvent, useRef } from 'react';
+import { FC, TouchEvent, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getTags } from '@/api/tags';
 import { Button, Icon } from '@/Components/';
-import useTags from '@/hooks/useTags';
-import { onError } from '@/utils/onError';
 import { TagDTO } from '@/api/types/tags';
 
 import styles from './index.module.scss';
+import useTagStore from '@/stores/useTagStore';
 
 interface TagsProps {
   kind: string;
@@ -18,13 +16,11 @@ export const Tags: FC<TagsProps> = (props) => {
   console.log(props);
 
   const nav = useNavigate();
-  const {
-    tags: tagList,
-    hasMore,
-    getTagList,
-  } = useTags((p) => getTags({ kind: props.kind, page: p + 1 }).catch(onError));
-  console.log(tagList.current);
+  const { tagList, hasMore, getTagList, page } = useTagStore();
 
+  useEffect(() => {
+    getTagList({ kind: props.kind, page: page })
+  }, [])
   const addNewTag = () => {
     nav(`/tags/create?kind=${props.kind}`);
   };
@@ -57,8 +53,9 @@ export const Tags: FC<TagsProps> = (props) => {
           </div>
           <div className={styles.name}>新增</div>
         </div>
-        {tagList.current.map((tag) => (
+        {tagList.map((tag, index) => (
           <div
+            key={index}
             className={[styles.tag, props.selected === tag.id ? styles.selected : ''].join(' ')}
             onClick={() => props.onSelect(tag.id!)}
             onTouchStart={(e) => onTouchStart(e, tag)}
@@ -70,8 +67,8 @@ export const Tags: FC<TagsProps> = (props) => {
         ))}
       </div>
       <div className={styles.loadMore}>
-        {hasMore.current && tagList.current.length ? (
-          <Button onClick={getTagList}>加载更多</Button>
+        {hasMore && tagList.length ? (
+          <Button onClick={() => getTagList}>加载更多</Button>
         ) : (
           <span>没有更多了</span>
         )}

@@ -8,7 +8,7 @@ export type TagDTO = {
 export interface TagResult {
   tagList: TagDTO[];
   pager: {
-    page: number;
+    page: string;
     per_page: number;
     count: number;
   };

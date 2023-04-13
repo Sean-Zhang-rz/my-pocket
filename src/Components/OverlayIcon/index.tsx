@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { animated, useSpring } from '@react-spring/web';
 import useMenuStore from '@/stores/useMenuStore';
 import Icon from '@/Components/Icon';
@@ -26,7 +26,7 @@ export const OverlayIcon: FC = () => {
     config: { duration: 300 }
   })
 
-  const route = useParams();
+  const location = useLocation()
 
   const onSignOut = async () => {
     // await Dialog.confirm({
@@ -58,7 +58,7 @@ export const OverlayIcon: FC = () => {
               <p onClick={onSignOut}>退出登录</p>
             </div>
           ) : (
-            <Link to={`/sign_in?return_to=${route.fullPath}`}>
+            <Link to={`/sign-in?return_to=${location.pathname}`}>
               <h2>未登录用户</h2>
               <p>点击这里登录</p>
             </Link>
