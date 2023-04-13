@@ -4,10 +4,12 @@ import { animated, useSpring } from '@react-spring/web';
 import useMenuStore from '@/stores/useMenuStore';
 import Icon from '@/Components/Icon';
 import styles from './index.module.scss';
+import useMeStore from '@/stores/useMeStore';
 
 export const OverlayIcon: FC = () => {
   const nav = useNavigate();
   const { visible, setVisible } = useMenuStore()
+  const { me } = useMeStore()
   const myInfo = false
   const [maskVisible, setMaskVisible] = useState(false)
   const maskStyles = useSpring({
@@ -26,6 +28,13 @@ export const OverlayIcon: FC = () => {
     config: { duration: 300 }
   })
 
+  const init = async () => {
+    console.log('me', me);
+
+    const result = await me
+    console.log('result', result);
+  }
+
   const location = useLocation()
 
   const onSignOut = async () => {
@@ -40,9 +49,16 @@ export const OverlayIcon: FC = () => {
   const close = () => {
     setVisible(false)
   };
-  useEffect(() => () => {
-    close()
+
+  useEffect(() => {
+    // const { me } = useMeStore()
+    init()
+
+    return () => {
+      close()
+    }
   }, []);
+
   return (
     <>
       <animated.div

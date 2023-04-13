@@ -16,10 +16,10 @@ export const Tags: FC<TagsProps> = (props) => {
   console.log(props);
 
   const nav = useNavigate();
-  const { tagList, hasMore, getTagList, page } = useTagStore();
+  const { tagList, hasMore, getTagList, getNextTagList } = useTagStore();
 
   useEffect(() => {
-    getTagList({ kind: props.kind, page: page })
+    getTagList(props.kind)
   }, [])
   const addNewTag = () => {
     nav(`/tags/create?kind=${props.kind}`);
@@ -68,7 +68,7 @@ export const Tags: FC<TagsProps> = (props) => {
       </div>
       <div className={styles.loadMore}>
         {hasMore && tagList.length ? (
-          <Button onClick={() => getTagList}>加载更多</Button>
+          <Button onClick={() => getNextTagList}>加载更多</Button>
         ) : (
           <span>没有更多了</span>
         )}

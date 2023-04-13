@@ -5,14 +5,15 @@ import { Icon, Button, Form, FormItem, MainLayout, Input } from '@/Components/in
 import { getValidationCode, signIn } from '@/api/common';
 import { onError } from '@/utils/onError';
 import useSignInStore from '@/stores/useSignInStore';
-// import { useMeStore } from '@/stores/useMeStore';
+import useMeStore from '@/stores/useMeStore';
 // import { Toast } from 'vant';
 import TimerButton from '../Components/TimerButton';
 import styles from './index.module.scss';
 
 
+
 const SignInPage: FC = () => {
-  // const meStore = useMeStore();
+  const { refreshMe } = useMeStore();
   const [route] = useSearchParams();
   const nav = useNavigate();
   const refValidationCode = useRef<{ startCount: () => void }>(null);
@@ -29,17 +30,14 @@ const SignInPage: FC = () => {
       return;
     }
     await getValidationCode({ email: formData.email }).catch(onError);
-    console.log('1. getValidationCode');
-
     if (refValidationCode.current) refValidationCode.current.startCount();
   };
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     console.log('点击了登录');
-
     const res = await signIn(formData).catch(onError);
     localStorage.setItem('jwt', res.data.jwt);
     const returnTo = route.get('return_to');
-    // meStore.refreshMe();
+    refreshMe();
     nav(returnTo || '/start', { replace: true });
   };
 
