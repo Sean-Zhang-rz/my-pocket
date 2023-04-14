@@ -5,13 +5,12 @@ import { Icon, Button, Form, FormItem, MainLayout, Input } from '@/Components/in
 import { getValidationCode, signIn } from '@/api/common';
 import { onError } from '@/utils/onError';
 import useSignInStore from '@/stores/useSignInStore';
-import useMeStore from '@/stores/useMeStore';
 // import { Toast } from 'vant';
 import TimerButton from '../Components/TimerButton';
 import styles from './index.module.scss';
 
 const SignInPage: FC = () => {
-  const { refreshMe } = useMeStore();
+  // const { refreshMe } = useMeStore();
   const [route] = useSearchParams();
   const nav = useNavigate();
   const refValidationCode = useRef<{ startCount: () => void }>(null);
@@ -34,7 +33,7 @@ const SignInPage: FC = () => {
     const res = await signIn(formData).catch(onError);
     localStorage.setItem('jwt', res.data.jwt);
     const returnTo = route.get('return_to');
-    refreshMe();
+    // refreshMe();
     nav(returnTo || '/start', { replace: true });
   };
 

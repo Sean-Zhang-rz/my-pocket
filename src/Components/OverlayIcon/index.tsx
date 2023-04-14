@@ -1,16 +1,21 @@
 import { FC, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import useSWR from 'swr';
+import request, { Result } from '@/config/request';
+import { User } from '@/api/types/common';
 import { animated, useSpring } from '@react-spring/web';
 import useMenuStore from '@/stores/useMenuStore';
 import Icon from '@/Components/Icon';
 import styles from './index.module.scss';
-import useMeStore from '@/stores/useMeStore';
+
 
 export const OverlayIcon: FC = () => {
   const nav = useNavigate();
+  const location = useLocation()
   const { visible, setVisible } = useMenuStore()
-  const { me } = useMeStore()
-  const myInfo = false
+  const { data: me, error } = useSWR('/me', async (path) => (
+    await request.get<User>(path)).data
+  )
   const [maskVisible, setMaskVisible] = useState(false)
   const maskStyles = useSpring({
     opacity: visible ? 1 : 0,
@@ -28,22 +33,13 @@ export const OverlayIcon: FC = () => {
     config: { duration: 300 }
   })
 
-  const init = async () => {
-    console.log('me', me);
-
-    const result = await me
-    console.log('result', result);
-  }
-
-  const location = useLocation()
-
   const onSignOut = async () => {
     // await Dialog.confirm({
     //   title: '确认',
     //   message: '确认要退出登录吗？',
     // });
     localStorage.removeItem('jwt');
-    nav('/sign_in');
+    nav('/sign-in');
   };
 
   const close = () => {
@@ -51,9 +47,6 @@ export const OverlayIcon: FC = () => {
   };
 
   useEffect(() => {
-    // const { me } = useMeStore()
-    init()
-
     return () => {
       close()
     }
@@ -68,9 +61,9 @@ export const OverlayIcon: FC = () => {
       />
       <animated.div className={styles.overlay} style={menuStyles}>
         <section className={styles.currentUser}>
-          {myInfo ? (
+          {me ? (
             <div>
-              {/* <h2 className={styles.email}>{myInfo.email}</h2> */}
+              <h2 className={styles.email}>{me.email}</h2>
               <p onClick={onSignOut}>退出登录</p>
             </div>
           ) : (
