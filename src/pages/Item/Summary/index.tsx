@@ -24,8 +24,6 @@ export const ItemSummary: FC<ItemSummaryProps> = (props) => {
   });
 
   const fetchBalance = async () => {
-    console.log('fetchBalance');
-
     const res = await getBalance({
       happen_after: props.startDate,
       happen_before: props.endDate,

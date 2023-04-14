@@ -28,8 +28,6 @@ const TimerButton: ForwardRefRenderFunction<TimerButtonRef, TimerButtonProps> = 
     ref,
     () => ({
       startCount: () => {
-        console.log('2. startCount');
-
         timer.current = setInterval(() => {
           setCount((pre) => pre - 1);
           if (count === 0) {

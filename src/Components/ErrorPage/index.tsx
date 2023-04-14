@@ -1,17 +1,15 @@
+import { ErrorUnauthorized } from '@/utils/errors';
 import { FC } from 'react';
-import { useRouteError } from 'react-router-dom';
+import { Navigate, useLocation, useRouteError } from 'react-router-dom';
 
 const ErrorPage: FC = () => {
-  const error: any = useRouteError();
-
-  return (
-    <div id="error-page">
-      <h1>哎哟！</h1>
-      <p>不好意思，出现一个错误</p>
-      <p>
-        <i>{error.statusText || error.message}</i>
-      </p>
-    </div>
-  );
+  const error = useRouteError() as Error;
+  const loc = useLocation()
+  const from = encodeURIComponent(`${loc.pathname}${loc.search}`)
+  if (error instanceof ErrorUnauthorized) {
+    return <Navigate to={`/sign-in?from=${from}`} replace />
+  } else {
+    return <div>未知错误</div>
+  }
 };
 export default ErrorPage;

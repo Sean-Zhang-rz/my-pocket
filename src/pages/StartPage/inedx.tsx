@@ -9,10 +9,10 @@ import loadingSVG from '@/assets/icons/loading.svg'
 import styles from './index.module.scss';
 
 const StartPage: FC = () => {
-  const { data: meData, error: meError } = useSWR(
-    '/me',
-    async (path) => await request.get<User>(path)
-  );
+  // const { data: meData, error: meError } = useSWR(
+  //   '/me',
+  //   async (path) => await request.get<User>(path)
+  // );
   // console.log(meData);
   return (
     <MainLayout title="山竹记账" icon="menu">

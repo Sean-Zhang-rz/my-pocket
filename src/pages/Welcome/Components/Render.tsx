@@ -31,8 +31,6 @@ const WelcomeRender: FC<{ pathname: string }> = (props) => {
     ];
   const pageId = parseInt(props.pathname[props.pathname.length - 1] || '');
   const item = slotsArray[pageId - 1];
-  console.log();
-
   return (
     <div className={styles.card}>
       <Icon name={item.icon} className={styles.img} />

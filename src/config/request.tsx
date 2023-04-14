@@ -1,3 +1,4 @@
+import { ErrorUnauthorized } from '@/utils/errors';
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 // import { Toast } from 'vant';
@@ -34,12 +35,9 @@ export class Request {
         return respopnse.data;
       },
       (error) => {
-        const navigate = useNavigate();
-        const route = useParams();
         // Toast.clear();
         if (error.response.status === 401) {
-          navigate(`/sign_in?return_to=${route.fullPath}`);
-          return;
+          throw error
         }
         if (error.response.status === 404) {
           // Toast('网络开小差了');

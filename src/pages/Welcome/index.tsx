@@ -17,6 +17,7 @@ const Welcome: FC = () => {
   const [extraStyle, setExtraStyle] = useState<{
     position: 'absolute' | 'relative';
   }>({ position: 'relative' });
+
   const transitions = useTransition(location.pathname, {
     from: () =>
       direction === 'left'

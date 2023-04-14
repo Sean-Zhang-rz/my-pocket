@@ -8,6 +8,9 @@ import WelcomeRedirection from '@/pages/Welcome/Components/WelocomeRedirection';
 import Welcome from '../pages/Welcome';
 import ItemList from '@/pages/Item';
 import ItemCreate from '@/pages/Item/Create';
+import request, { Result } from './request';
+import { User } from '@/api/types/common';
+import { ErrorUnauthorized } from '@/utils/errors';
 
 const router = createHashRouter([
   {
@@ -34,12 +37,25 @@ const router = createHashRouter([
         ],
       },
       {
-        path: '/start',
-        element: <StartPage />,
-      },
-      {
         path: '/sign-in',
         element: <SignInPage />,
+      },
+    ],
+  },
+  {
+    path: '/',
+    element: <Outlet />,
+    errorElement: <ErrorPage />,
+    loader: async () => {
+      return await request.get<Result<User>>('/me').catch(e => {
+        if (e.response.status === 401) throw new ErrorUnauthorized()
+        throw e
+      })
+    },
+    children: [
+      {
+        path: '/start',
+        element: <StartPage />,
       },
       {
         path: '/items',
@@ -55,8 +71,8 @@ const router = createHashRouter([
           },
         ],
       },
-    ],
-  },
+    ]
+  }
 ]);
 
 export default router;

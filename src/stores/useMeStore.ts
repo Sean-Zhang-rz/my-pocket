@@ -17,7 +17,6 @@ const useMeStore = create<MeState>((set, get) => ({
   me: undefined,
 
   async refreshMe(){
-    
     const me = request.get<User>('/me')
     this.me = me
     set({

@@ -18,7 +18,6 @@ const Button: FC<ButtonProps> = (props) => {
     return selfDisabled || props.disabled;
   }, [props.autoSelfDisabled, props.disabled]);
   const onClick = (e: MouseEvent<HTMLButtonElement>) => {
-    console.log('点击了');
     props.onClick?.(e);
     setSelfDisabled(true);
     setTimeout(() => {
