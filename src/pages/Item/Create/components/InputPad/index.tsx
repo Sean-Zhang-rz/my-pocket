@@ -9,7 +9,7 @@ export const InputPad: FC<InputPadProps> = (props) => {
     <div className={[styles.wrap, props.className].join(' ')}>
       <div className={styles.top}>
         <span className={styles.date}>
-          <Icon name="add" className={styles.icon}></Icon>
+          <Icon name="calendar" className={styles.icon}></Icon>
           <span>2001-02-03</span>
         </span>
         <code>123285</code>

@@ -17,7 +17,8 @@ export type IconName =
   | 'back'
   | 'date'
   | 'loading'
-  | 'none';
+  | 'none'
+  | 'calendar';
 interface IconProps {
   name: IconName;
   className?: string;
