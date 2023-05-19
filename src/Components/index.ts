@@ -10,6 +10,7 @@ import NavBar from './NavBar';
 import OverlayIcon from './OverlayIcon';
 import InputPad from './InputPad';
 import Input from './Input';
+import {Popup} from './Popup';
 
 export {
   Button,
@@ -24,4 +25,5 @@ export {
   OverlayIcon,
   InputPad,
   Input,
+  Popup
 };
