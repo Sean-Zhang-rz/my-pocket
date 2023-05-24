@@ -14,8 +14,8 @@ export const InputPad: FC<InputPadProps> = (props) => {
   return (
     <div className={[styles.wrap, props.className].join(' ')}>
       <div className={styles.top}>
-        <span className={styles.date} onClick={onClickDate}>
-          <Icon name="add" className={styles.icon}></Icon>
+        <span className={styles.date}>
+          <Icon name="calendar" className={styles.icon}></Icon>
           <span>2001-02-03</span>
         </span>
         <code>123285</code>
