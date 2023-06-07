@@ -47,10 +47,10 @@ const router = createHashRouter([
     element: <Outlet />,
     errorElement: <ErrorPage />,
     loader: async () => {
-      return await request.get<Result<User>>('/me').catch(e => {
-        if (e.response.status === 401) throw new ErrorUnauthorized()
-        throw e
-      })
+      return await request.get<Result<User>>('/me').catch((e) => {
+        if (e.response.status === 401) throw new ErrorUnauthorized();
+        throw e;
+      });
     },
     children: [
       {
@@ -71,8 +71,8 @@ const router = createHashRouter([
           },
         ],
       },
-    ]
-  }
+    ],
+  },
 ]);
 
 export default router;
