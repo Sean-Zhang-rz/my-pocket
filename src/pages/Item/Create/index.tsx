@@ -2,14 +2,17 @@ import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createItems } from '@/api/item';
 import { ItemCreateDTO } from '@/api/types/items';
-import { MainLayout, Tab, Tabs } from '@/Components';
+import { MainLayout, Tab, Tabs, Popup } from '@/Components';
 import { onError } from '@/utils/onError';
+import { InputPad } from './components/InputPad';
 import Tags from './Tags';
 
 import styles from './index.module.scss';
-import { InputPad } from './components/InputPad';
+
+
 
 const ItemCreate: FC = () => {
+
   const [formData, setFormData] = useState<ItemCreateDTO>({
     kind: 'expenses',
     tag_id: '',
@@ -17,6 +20,7 @@ const ItemCreate: FC = () => {
     happen_at: new Date().toISOString(),
   });
   const nav = useNavigate();
+
   const onSelected = (selected: string) => {
     if (formData.kind === selected) return;
     if (selected === 'expenses' || selected === 'income') {

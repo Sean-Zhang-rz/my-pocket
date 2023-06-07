@@ -1,10 +1,16 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import styles from './index.module.scss';
-import { Icon } from '@/Components';
+import { Icon, Popup } from '@/Components';
 interface InputPadProps {
   className?: string;
 }
 export const InputPad: FC<InputPadProps> = (props) => {
+  const [visible, setVisible] = useState(false)
+  const onClickDate = () => {
+    console.log('点击了');
+
+    setVisible(!visible)
+  }
   return (
     <div className={[styles.wrap, props.className].join(' ')}>
       <div className={styles.top}>
@@ -31,6 +37,7 @@ export const InputPad: FC<InputPadProps> = (props) => {
           <button>提交</button>
         </div>
       </div>
+      <Popup visible={visible} onClickMask={() => setVisible(false)} />
     </div>
   );
 };

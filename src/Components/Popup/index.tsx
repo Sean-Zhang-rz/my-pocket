@@ -32,7 +32,7 @@ export const Popup: FC<PopupProps> = (props) => {
       <animated.div
         className="bg-black:75"
         onClick={() => onClickMask?.()}
-        // style={maskStyles2}
+      // style={maskStyles2}
       />
       <animated.div style={menuStyles}></animated.div>
     </div>
