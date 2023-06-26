@@ -12,7 +12,7 @@ export default defineConfig({
       '@': join(__dirname, 'src'),
     },
   },
-  plugins: [react(), Unocss(), svgstore()],
+  plugins: [Unocss(), react(), svgstore()],
   server: {
     proxy: {
       '/api/v1': {

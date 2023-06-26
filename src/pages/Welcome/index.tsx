@@ -8,7 +8,6 @@ import WelcomeRender from './Components/Render';
 import WelcomeAction from './Components/Action';
 import styles from './index.module.scss';
 
-
 const Welcome: FC = () => {
   const main = useRef<HTMLElement>(null);
   const route = useParams();
@@ -58,12 +57,15 @@ const Welcome: FC = () => {
   }, [swiping, direction]);
 
   return (
-    <div className={styles.wrapper}>
-      <header>
+    <div className={styles.wrapper} flex flex-col b-1>
+      {/* text-center pt-64px */}
+      <header flex flex-col justify-center items-center pt-66px>
         <Icon name="logo" />
-        <h1>山竹记账</h1>
+        <h1 text="#D4D4EE" text-32px>
+          山竹记账
+        </h1>
       </header>
-      <main className={styles.main} ref={main}>
+      <main shrink-1 grow-1 bg-white m-16px rounded-8px flex justify-center items-center ref={main}>
         {transitions((style, pathname) => (
           <animated.div
             key={pathname}
