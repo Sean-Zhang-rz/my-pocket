@@ -6,34 +6,4 @@
     var(--welcome-bg-end) 100%
   );
   margin-bottom: var(--welcome-nav-height);
-  // > header {
-  //   // flex-shrink: 0;
-  //   // display: flex;
-  //   // flex-direction: column;
-  //   // justify-content: center;
-  //   // align-items: center;
-  //   // padding-top: 66px;
-  //   color: #d4d4ee;
-  // }
-  > main {
-    flex-grow: 1;
-    flex-shrink: 1;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-
-    .animated {
-      display: flex;
-      padding: 16px;
-      width: 100%;
-      height: 100%;
-
-      .render_wraper {
-        flex-grow: 1;
-      }
-    }
-  }
-  > footer {
-    flex-shrink: 0;
-  }
 }

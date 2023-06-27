@@ -57,28 +57,30 @@ const Welcome: FC = () => {
   }, [swiping, direction]);
 
   return (
-    <div className={styles.wrapper} flex flex-col b-1>
-      {/* text-center pt-64px */}
-      <header flex flex-col justify-center items-center pt-66px>
+    <div className={styles.wrapper} flex flex-col>
+      <header flex flex-col justify-center items-center pt-66px color="#d4d4ee">
         <Icon name="logo" />
         <h1 text="#D4D4EE" text-32px>
           山竹记账
         </h1>
       </header>
-      <main shrink-1 grow-1 bg-white m-16px rounded-8px flex justify-center items-center ref={main}>
+      <main shrink-1 grow-1 flex flex-col relative ref={main}>
         {transitions((style, pathname) => (
           <animated.div
             key={pathname}
             style={{ ...style, ...extraStyle }}
-            className={styles.animated}
+            flex
+            p-16px
+            w="100%"
+            h="100%"
           >
-            <div className={styles.render_wraper}>
+            <div grow-1>
               <WelcomeRender pathname={pathname} />
             </div>
           </animated.div>
         ))}
       </main>
-      <footer>
+      <footer shrink-0>
         <WelcomeAction />
       </footer>
     </div>

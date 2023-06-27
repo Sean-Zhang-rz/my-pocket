@@ -12,7 +12,8 @@ const WelcomeAction: FC = () => {
     setSkipFeature(true);
   };
   return (
-    <div className={styles.actions}>
+    <div absolute left-0 bottom-0 right-0 flex justify-between items-center font-24px>
+      {/* className={styles.actions} */}
       <Link className={styles.fake} to={'/start'}>
         跳过
       </Link>
